@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  country: 1
+  ministry: 1
+  name: MyString
+  desc_brief: MyString
+  desc_detail: MyText
+  start: 2009-11-20 21:17:57
+  end: 2009-11-20 21:17:57
+  reg_start: 2009-11-20 21:17:57
+  reg_end: 2009-11-20 21:17:57
+  website: MyString
+  email_text: MyText
+  price: 1.5
+  deposit: 1.5
+  email: MyText
+  price_text: MyText
+  on_home_page: false
+  allow_cash: false
+
+two:
+  country: 1
+  ministry: 1
+  name: MyString
+  desc_brief: MyString
+  desc_detail: MyText
+  start: 2009-11-20 21:17:57
+  end: 2009-11-20 21:17:57
+  reg_start: 2009-11-20 21:17:57
+  reg_end: 2009-11-20 21:17:57
+  website: MyString
+  email_text: MyText
+  price: 1.5
+  deposit: 1.5
+  email: MyText
+  price_text: MyText
+  on_home_page: false
+  allow_cash: false

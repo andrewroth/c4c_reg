@@ -1,0 +1,80 @@
+<h1>Editing event</h1>
+
+<% form_for(@event) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
+  </p>
+  <p>
+    <%= f.label :ministry %><br />
+    <%= f.text_field :ministry %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :desc_brief %><br />
+    <%= f.text_field :desc_brief %>
+  </p>
+  <p>
+    <%= f.label :desc_detail %><br />
+    <%= f.text_area :desc_detail %>
+  </p>
+  <p>
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start %>
+  </p>
+  <p>
+    <%= f.label :end %><br />
+    <%= f.datetime_select :end %>
+  </p>
+  <p>
+    <%= f.label :reg_start %><br />
+    <%= f.datetime_select :reg_start %>
+  </p>
+  <p>
+    <%= f.label :reg_end %><br />
+    <%= f.datetime_select :reg_end %>
+  </p>
+  <p>
+    <%= f.label :website %><br />
+    <%= f.text_field :website %>
+  </p>
+  <p>
+    <%= f.label :email_text %><br />
+    <%= f.text_area :email_text %>
+  </p>
+  <p>
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :deposit %><br />
+    <%= f.text_field :deposit %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_area :email %>
+  </p>
+  <p>
+    <%= f.label :price_text %><br />
+    <%= f.text_area :price_text %>
+  </p>
+  <p>
+    <%= f.label :on_home_page %><br />
+    <%= f.check_box :on_home_page %>
+  </p>
+  <p>
+    <%= f.label :allow_cash %><br />
+    <%= f.check_box :allow_cash %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @event %> |
+<%= link_to 'Back', events_path %>
