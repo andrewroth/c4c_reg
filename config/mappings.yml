@@ -11,8 +11,8 @@ tables:
 
 assignment:
   id: assignment_id
-  person_id: person_id
-  campus_id: campus_id
+  #person_id: person_id
+  #campus_id: campus_id
   status_id: assignmentstatus_id
 
 assignment_status:
@@ -28,12 +28,12 @@ campus:
   website: campus_website
   facebook_group: campus_facebookgroup
   gcx_namespace: campus_gcxnamespace
-  province_id: province_id
+  #province_id: province_id
 
 event:
   id: event_id
-  country_id: country_id
-  ministry_id: ministry_id
+  #country_id: country_id
+  #ministry_id: ministry_id
   name: event_name
   desc_brief: event_descBrief
   desc_detail: event_descDetail
@@ -60,25 +60,25 @@ person:
   email: person_email
   address: person_addr
   city: person_city
-  province_id: province_id
+  #province_id: province_id
   postal_code: person_pc
-  gender_id: gender_id
+  #gender_id: gender_id
   local_phone: person_local_phone
   local_address: person_local_addr
   local_city: person_local_city
   local_postal_code: person_local_pc
   local_province_id: person_local_province_id
-  cell_phone: cell_phone
-  local_valid_until: local_valid_until
-  title_id: title_id
-  country_id: country_id
+  #cell_phone: cell_phone
+  #local_valid_until: local_valid_until
+  #title_id: title_id
+  #country_id: country_id
   local_country_id: person_local_country_id
   middle_name: person_mname
 
 registration:
   id: registration_id
-  event_id: event_id
-  person_id: person_id
+  #event_id: event_id
+  #person_id: person_id
   date: registration_date
   confirm_num: registration_confirmNum
   status_id: registration_status
