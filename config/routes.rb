@@ -1,4 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :campus
+
+  map.resources :campus
+
+  map.resources :campus
+
+  map.resources :people
+
   map.resources :registrations
 
 

@@ -1,8 +1,8 @@
 class CreateEvents < ActiveRecord::Migration
   def self.up
     create_table :events do |t|
-      t.integer :country,       :null => false,  :default => 0
-      t.integer :ministry,      :null => false,  :default => 0
+      t.integer :country_id,    :null => false,  :default => 0
+      t.integer :ministry_id,   :null => false,  :default => 0
       t.string :name,           :null => false,  :limit => 128
       t.string :desc_brief,     :null => false,  :limit => 128 
       t.text :desc_detail,      :null => false

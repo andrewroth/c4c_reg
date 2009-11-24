@@ -1,0 +1,62 @@
+<h1>Listing people</h1>
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Legal first name</th>
+    <th>Legal last name</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Province</th>
+    <th>Postal code</th>
+    <th>Gender</th>
+    <th>Local phone</th>
+    <th>Local address</th>
+    <th>Local city</th>
+    <th>Local postal code</th>
+    <th>Local province</th>
+    <th>Cell phone</th>
+    <th>Local valid until</th>
+    <th>Title</th>
+    <th>Country</th>
+    <th>Local country</th>
+    <th>Middle name</th>
+  </tr>
+
+<% @people.each do |person| %>
+  <tr>
+    <td><%=h person.first_name %></td>
+    <td><%=h person.last_name %></td>
+    <td><%=h person.legal_first_name %></td>
+    <td><%=h person.legal_last_name %></td>
+    <td><%=h person.phone %></td>
+    <td><%=h person.email %></td>
+    <td><%=h person.address %></td>
+    <td><%=h person.city %></td>
+    <td><%=h person.province_id %></td>
+    <td><%=h person.postal_code %></td>
+    <td><%=h person.gender_id %></td>
+    <td><%=h person.local_phone %></td>
+    <td><%=h person.local_address %></td>
+    <td><%=h person.local_city %></td>
+    <td><%=h person.local_postal_code %></td>
+    <td><%=h person.local_province_id %></td>
+    <td><%=h person.cell_phone %></td>
+    <td><%=h person.local_valid_until %></td>
+    <td><%=h person.title_id %></td>
+    <td><%=h person.country_id %></td>
+    <td><%=h person.local_country_id %></td>
+    <td><%=h person.middle_name %></td>
+    <td><%= link_to 'Show', person %></td>
+    <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    <td><%= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New person', new_person_path %>
