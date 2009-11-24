@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20091124160556) do
     t.integer  "person_id",                 :default => 0,   :null => false
     t.datetime "date",                                       :null => false
     t.string   "confirm_num", :limit => 64,                  :null => false
-    t.integer  "status",                    :default => 0,   :null => false
+    t.integer  "status_id",                 :default => 0,   :null => false
     t.float    "balance",                   :default => 0.0, :null => false
   end
 
