@@ -2,47 +2,13 @@
 
 <table>
   <tr>
-    <th>Country</th>
-    <th>Ministry</th>
     <th>Name</th>
-    <th>Desc brief</th>
-    <th>Desc detail</th>
-    <th>Start</th>
-    <th>End</th>
-    <th>Reg start</th>
-    <th>Reg end</th>
-    <th>Website</th>
-    <th>Email text</th>
-    <th>Price</th>
-    <th>Deposit</th>
-    <th>Email</th>
-    <th>Price text</th>
-    <th>On home page</th>
-    <th>Allow cash</th>
   </tr>
 
 <% @events.each do |event| %>
   <tr>
-    <td><%=h event.country %></td>
-    <td><%=h event.ministry %></td>
     <td><%=h event.name %></td>
-    <td><%=h event.desc_brief %></td>
-    <td><%=h event.desc_detail %></td>
-    <td><%=h event.start %></td>
-    <td><%=h event.end %></td>
-    <td><%=h event.reg_start %></td>
-    <td><%=h event.reg_end %></td>
-    <td><%=h event.website %></td>
-    <td><%=h event.email_text %></td>
-    <td><%=h event.price %></td>
-    <td><%=h event.deposit %></td>
-    <td><%=h event.email %></td>
-    <td><%=h event.price_text %></td>
-    <td><%=h event.on_home_page %></td>
-    <td><%=h event.allow_cash %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Administrate', event %></td>
   </tr>
 <% end %>
 </table>

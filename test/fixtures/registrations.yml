@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event: 1
+  person: 1
+  date: 2009-11-23 21:43:17
+  confirm_num: MyString
+  status: 1
+  balance: 1.5
+
+two:
+  event: 1
+  person: 1
+  date: 2009-11-23 21:43:17
+  confirm_num: MyString
+  status: 1
+  balance: 1.5

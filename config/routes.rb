@@ -1,4 +1,17 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :campus
+
+  map.resources :campus
+
+  map.resources :campus
+
+  map.resources :people
+
+  map.resources :registrations
+
+
+  map.root :controller => 'events'
+
   map.resources :events
 
   # The priority is based upon order of creation: first created -> highest priority.

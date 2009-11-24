@@ -1,0 +1,33 @@
+<p>
+  <b>Event:</b>
+  <%=h @registration.event_id %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%=h @registration.person_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%=h @registration.date %>
+</p>
+
+<p>
+  <b>Confirm num:</b>
+  <%=h @registration.confirm_num %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @registration.status_id %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%=h @registration.balance %>
+</p>
+
+
+<%= link_to 'Edit', edit_registration_path(@registration) %> |
+<%= link_to 'Back', registrations_path %>

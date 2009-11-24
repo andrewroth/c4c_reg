@@ -1,0 +1,43 @@
+<p>
+  <b>Description:</b>
+  <%=h @campus.description %>
+</p>
+
+<p>
+  <b>Short description:</b>
+  <%=h @campus.short_description %>
+</p>
+
+<p>
+  <b>Account group:</b>
+  <%=h @campus.account_group_id %>
+</p>
+
+<p>
+  <b>Region:</b>
+  <%=h @campus.region_id %>
+</p>
+
+<p>
+  <b>Website:</b>
+  <%=h @campus.website %>
+</p>
+
+<p>
+  <b>Facebook group:</b>
+  <%=h @campus.facebook_group %>
+</p>
+
+<p>
+  <b>Gcx namespace:</b>
+  <%=h @campus.gcx_namespace %>
+</p>
+
+<p>
+  <b>Province:</b>
+  <%=h @campus.province_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_campus_path(@campus) %> |
+<%= link_to 'Back', campus_path %>

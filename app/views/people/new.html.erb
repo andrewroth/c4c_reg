@@ -1,0 +1,99 @@
+<h1>New person</h1>
+
+<% form_for(@person) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :legal_first_name %><br />
+    <%= f.text_field :legal_first_name %>
+  </p>
+  <p>
+    <%= f.label :legal_last_name %><br />
+    <%= f.text_field :legal_last_name %>
+  </p>
+  <p>
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :province_id %><br />
+    <%= f.text_field :province_id %>
+  </p>
+  <p>
+    <%= f.label :postal_code %><br />
+    <%= f.text_field :postal_code %>
+  </p>
+  <p>
+    <%= f.label :gender_id %><br />
+    <%= f.text_field :gender_id %>
+  </p>
+  <p>
+    <%= f.label :local_phone %><br />
+    <%= f.text_field :local_phone %>
+  </p>
+  <p>
+    <%= f.label :local_address %><br />
+    <%= f.text_field :local_address %>
+  </p>
+  <p>
+    <%= f.label :local_city %><br />
+    <%= f.text_field :local_city %>
+  </p>
+  <p>
+    <%= f.label :local_postal_code %><br />
+    <%= f.text_field :local_postal_code %>
+  </p>
+  <p>
+    <%= f.label :local_province_id %><br />
+    <%= f.text_field :local_province_id %>
+  </p>
+  <p>
+    <%= f.label :cell_phone %><br />
+    <%= f.text_field :cell_phone %>
+  </p>
+  <p>
+    <%= f.label :local_valid_until %><br />
+    <%= f.date_select :local_valid_until %>
+  </p>
+  <p>
+    <%= f.label :title_id %><br />
+    <%= f.text_field :title_id %>
+  </p>
+  <p>
+    <%= f.label :country_id %><br />
+    <%= f.text_field :country_id %>
+  </p>
+  <p>
+    <%= f.label :local_country_id %><br />
+    <%= f.text_field :local_country_id %>
+  </p>
+  <p>
+    <%= f.label :middle_name %><br />
+    <%= f.text_field :middle_name %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', people_path %>

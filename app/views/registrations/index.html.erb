@@ -1,0 +1,30 @@
+<h1>Listing registrations</h1>
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Person</th>
+    <th>Date</th>
+    <th>Confirm num</th>
+    <th>Status</th>
+    <th>Balance</th>
+  </tr>
+
+<% @registrations.each do |registration| %>
+  <tr>
+    <td><%=h registration.event_id %></td>
+    <td><%=h registration.person_id %></td>
+    <td><%=h registration.date %></td>
+    <td><%=h registration.confirm_num %></td>
+    <td><%=h registration.status_id %></td>
+    <td><%=h registration.balance %></td>
+    <td><%= link_to 'Show', registration %></td>
+    <td><%= link_to 'Edit', edit_registration_path(registration) %></td>
+    <td><%= link_to 'Destroy', registration, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New registration', new_registration_path %>
