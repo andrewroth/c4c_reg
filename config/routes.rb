@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :registrations
+
 
   map.root :controller => 'events'
 

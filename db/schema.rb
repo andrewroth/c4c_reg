@@ -9,28 +9,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091121021757) do
+ActiveRecord::Schema.define(:version => 20091124024317) do
 
   create_table "events", :force => true do |t|
-    t.integer  "country"
-    t.integer  "ministry"
-    t.string   "name"
-    t.string   "desc_brief"
-    t.text     "desc_detail"
-    t.datetime "start"
-    t.datetime "end"
-    t.datetime "reg_start"
-    t.datetime "reg_end"
-    t.string   "website"
-    t.text     "email_text"
-    t.float    "price"
-    t.float    "deposit"
-    t.text     "email"
-    t.text     "price_text"
-    t.boolean  "on_home_page"
-    t.boolean  "allow_cash"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "country",                     :default => 0,     :null => false
+    t.integer  "ministry",                    :default => 0,     :null => false
+    t.string   "name",         :limit => 128,                    :null => false
+    t.string   "desc_brief",   :limit => 128,                    :null => false
+    t.text     "desc_detail",                                    :null => false
+    t.datetime "start",                                          :null => false
+    t.datetime "end",                                            :null => false
+    t.datetime "reg_start",                                      :null => false
+    t.datetime "reg_end",                                        :null => false
+    t.string   "website",      :limit => 128,                    :null => false
+    t.text     "email_text",                                     :null => false
+    t.float    "price",                       :default => 0.0,   :null => false
+    t.float    "deposit",                     :default => 0.0,   :null => false
+    t.text     "email",                                          :null => false
+    t.text     "price_text",                                     :null => false
+    t.boolean  "on_home_page",                :default => true,  :null => false
+    t.boolean  "allow_cash",                  :default => false, :null => false
+  end
+
+  create_table "registrations", :force => true do |t|
+    t.integer  "event",                     :default => 0,   :null => false
+    t.integer  "person",                    :default => 0,   :null => false
+    t.datetime "date",                                       :null => false
+    t.string   "confirm_num", :limit => 64,                  :null => false
+    t.integer  "status",                    :default => 0,   :null => false
+    t.float    "balance",                   :default => 0.0, :null => false
   end
 
 end
