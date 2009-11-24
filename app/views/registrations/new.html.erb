@@ -1,0 +1,35 @@
+<h1>New registration</h1>
+
+<% form_for(@registration) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :event %><br />
+    <%= f.text_field :event %>
+  </p>
+  <p>
+    <%= f.label :person %><br />
+    <%= f.text_field :person %>
+  </p>
+  <p>
+    <%= f.label :date %><br />
+    <%= f.datetime_select :date %>
+  </p>
+  <p>
+    <%= f.label :confirm_num %><br />
+    <%= f.text_field :confirm_num %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :balance %><br />
+    <%= f.text_field :balance %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', registrations_path %>
