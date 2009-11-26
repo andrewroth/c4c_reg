@@ -12,17 +12,19 @@ module EventsHelper
     # info will be a hash of hashes, so that it can be accessed via a campus' id
     # (in the legacy db the ids are not sequential so an array would not work)
     info = {}
-    
+    gender_max = Gender.maximum(:id)
+    reg_max = RegistrationStatus.maximum(:id)
+
     Campus.find(:all).each do |c|
       info.merge!({ c.id => { :name => c.description, :gender => [], :status => [] }})
 
-      init_array!(info[c.id][:gender], 0, Gender.maximum(:id), 0)
-      init_array!(info[c.id][:status], 0, RegistrationStatus.maximum(:id), 0)
+      init_array!(info[c.id][:gender], 0, gender_max, 0)
+      init_array!(info[c.id][:status], 0, reg_max, 0)
     end
     
     info.merge!({ :total => { :gender => [], :status => [] }})
-    init_array!(info[:total][:gender], 0, Gender.maximum(:id), 0)
-    init_array!(info[:total][:status], 0, RegistrationStatus.maximum(:id), 0)
+    init_array!(info[:total][:gender], 0, gender_max, 0)
+    init_array!(info[:total][:status], 0, reg_max, 0)
     
     
     event.registrations.each do |registration|
