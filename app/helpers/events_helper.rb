@@ -23,7 +23,7 @@ module EventsHelper
     info.merge!({ :total => { :gender => [], :status => [] }})
     init_array!(info[:total][:gender], 0, Gender.maximum(:id), 0)
     init_array!(info[:total][:status], 0, RegistrationStatus.maximum(:id), 0)
-
+    
     
     event.registrations.each do |registration|
       registration.person.assignments.each do |assignment|
