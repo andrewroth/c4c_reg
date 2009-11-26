@@ -1,87 +1,74 @@
-<p>
-  <b>Country:</b>
-  <%=h @event.country_id %>
-</p>
 
-<p>
-  <b>Ministry:</b>
-  <%=h @event.ministry_id %>
-</p>
+<% info = per_campus_event_info(@event) %>
 
-<p>
-  <b>Name:</b>
-  <%=h @event.name %>
-</p>
+<table>
+  <tr>
+    <th>Campus</th>
+    <th>Admin</th>
+    <th><%=  Gender.find(:first, :conditions => "id = 1").description %></th>
+    <th><%=  Gender.find(:first, :conditions => "id = 2").description %></th>
+    <th>Total</th>
+    <th><%=  RegistrationStatus.find(:first, :conditions => "id = 2").description %></th>
+    <th><%=  RegistrationStatus.find(:first, :conditions => "id = 1").description %></th>
+    <th><%=  RegistrationStatus.find(:first, :conditions => "id = 3").description %></th>
+  </tr>
 
-<p>
-  <b>Desc brief:</b>
-  <%=h @event.desc_brief %>
-</p>
+  <% Campus.find(:all).each do |c| %>
+  <tr>
+    <td>
+      <%= info[c.id][:name] %>
+    </td>
+    <td>
+      Registrations
+    </td>
+    <td>
+      <%= info[c.id][:gender][1] %>
+    </td>
+    <td>
+      <%= info[c.id][:gender][2] %>
+    </td>
+    <td>
+      <%= info[c.id][:gender][1] + info[c.id][:gender][2] %>
+    </td>
+    <td>
+      <%= info[c.id][:status][2] %>
+    </td>
+    <td>
+      <%= info[c.id][:status][1] %>
+    </td>
+    <td>
+      <%= info[c.id][:status][3] %>
+    </td>
+  </tr>
+  <% end %>
 
-<p>
-  <b>Desc detail:</b>
-  <%=h @event.desc_detail %>
-</p>
+  <tr>
+    <td>
+      Totals:
+    </td>
+    <td>
+    </td>
+    <td>
+      <%= info[:total][:gender][1] %>
+    </td>
+    <td>
+      <%= info[:total][:gender][2] %>
+    </td>
+    <td>
+      <%= info[:total][:gender][1] + info[:total][:gender][2] %>
+    </td>
+    <td>
+      <%= info[:total][:status][2] %>
+    </td>
+    <td>
+      <%= info[:total][:status][1] %>
+    </td>
+    <td>
+      <%= info[:total][:status][3] %>
+    </td>
+  </tr>
 
-<p>
-  <b>Start:</b>
-  <%=h @event.start %>
-</p>
-
-<p>
-  <b>End:</b>
-  <%=h @event.end %>
-</p>
-
-<p>
-  <b>Reg start:</b>
-  <%=h @event.reg_start %>
-</p>
-
-<p>
-  <b>Reg end:</b>
-  <%=h @event.reg_end %>
-</p>
-
-<p>
-  <b>Website:</b>
-  <%=h @event.website %>
-</p>
-
-<p>
-  <b>Email text:</b>
-  <%=h @event.email_text %>
-</p>
-
-<p>
-  <b>Price:</b>
-  <%=h @event.price %>
-</p>
-
-<p>
-  <b>Deposit:</b>
-  <%=h @event.deposit %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%=h @event.email %>
-</p>
-
-<p>
-  <b>Price text:</b>
-  <%=h @event.price_text %>
-</p>
-
-<p>
-  <b>On home page:</b>
-  <%=h @event.on_home_page %>
-</p>
-
-<p>
-  <b>Allow cash:</b>
-  <%=h @event.allow_cash %>
-</p>
+</table>
 
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

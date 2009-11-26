@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091124160556) do
+ActiveRecord::Schema.define(:version => 20091125203856) do
 
   create_table "assignment_statuses", :force => true do |t|
     t.string "description", :limit => 64, :null => false
@@ -52,6 +52,10 @@ ActiveRecord::Schema.define(:version => 20091124160556) do
     t.boolean  "allow_cash",                  :default => false, :null => false
   end
 
+  create_table "genders", :force => true do |t|
+    t.string "description", :limit => 50, :null => false
+  end
+
   create_table "people", :force => true do |t|
     t.string  "first_name",        :limit => 50,                 :null => false
     t.string  "last_name",         :limit => 50,                 :null => false
@@ -75,6 +79,10 @@ ActiveRecord::Schema.define(:version => 20091124160556) do
     t.integer "country_id"
     t.integer "local_country_id"
     t.string  "middle_name"
+  end
+
+  create_table "registration_statuses", :force => true do |t|
+    t.string "description", :limit => 32, :null => false
   end
 
   create_table "registrations", :force => true do |t|
