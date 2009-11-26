@@ -1,5 +1,5 @@
 
-<% info = per_campus_event_info(@event) %>
+<% campus_info = per_campus_event_info(@event) %>
 
 <table>
   <tr>
@@ -16,28 +16,28 @@
   <% Campus.find(:all).each do |c| %>
   <tr>
     <td>
-      <%= info[c.id][:name] %>
+      <%= campus_info[c.id][:name] %>
     </td>
     <td>
       Registrations
     </td>
     <td>
-      <%= info[c.id][:gender][1] %>
+      <%= campus_info[c.id][:gender][1] %>
     </td>
     <td>
-      <%= info[c.id][:gender][2] %>
+      <%= campus_info[c.id][:gender][2] %>
     </td>
     <td>
-      <%= info[c.id][:gender][1] + info[c.id][:gender][2] %>
+      <%= campus_info[c.id][:gender][1] + campus_info[c.id][:gender][2] %>
     </td>
     <td>
-      <%= info[c.id][:status][2] %>
+      <%= campus_info[c.id][:status][2] %>
     </td>
     <td>
-      <%= info[c.id][:status][1] %>
+      <%= campus_info[c.id][:status][1] %>
     </td>
     <td>
-      <%= info[c.id][:status][3] %>
+      <%= campus_info[c.id][:status][3] %>
     </td>
   </tr>
   <% end %>
@@ -49,22 +49,22 @@
     <td>
     </td>
     <td>
-      <%= info[:total][:gender][1] %>
+      <%= campus_info[:total][:gender][1] %>
     </td>
     <td>
-      <%= info[:total][:gender][2] %>
+      <%= campus_info[:total][:gender][2] %>
     </td>
     <td>
-      <%= info[:total][:gender][1] + info[:total][:gender][2] %>
+      <%= campus_info[:total][:gender][1] + campus_info[:total][:gender][2] %>
     </td>
     <td>
-      <%= info[:total][:status][2] %>
+      <%= campus_info[:total][:status][2] %>
     </td>
     <td>
-      <%= info[:total][:status][1] %>
+      <%= campus_info[:total][:status][1] %>
     </td>
     <td>
-      <%= info[:total][:status][3] %>
+      <%= campus_info[:total][:status][3] %>
     </td>
   </tr>
 
