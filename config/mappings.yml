@@ -1,5 +1,5 @@
 databases:
-  cim_dev: assignment, assignment_status, campus, event, person, registration
+  cim_dev: assignment, assignment_status, campus, event, person, registration, gender, registration_status
 
 tables:
   assignment: cim_hrdb_assignment
@@ -8,6 +8,8 @@ tables:
   event: cim_reg_event
   person: cim_hrdb_person
   registration: cim_reg_registration
+  gender: cim_hrdb_gender
+  registration_status: cim_registration_status
 
 assignment:
   id: assignment_id
@@ -83,3 +85,11 @@ registration:
   confirm_num: registration_confirmNum
   status_id: registration_status
   balance: registration_balance
+  
+gender:
+  id: gender_id
+  description: gender_desc
+
+registration_status:
+  id: status_id
+  description: status_desc
