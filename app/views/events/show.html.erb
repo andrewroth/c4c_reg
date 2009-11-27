@@ -1,72 +1,38 @@
 
-<% campus_info = per_campus_event_info(@event) %>
+<% campus_info = @event.per_campus_event_info() %>
+
+<h1><%= @event.name %></h1>
 
 <table>
   <tr>
     <th>Campus</th>
     <th>Admin</th>
-    <th><%=  Gender.find(:first, :conditions => "id = 1").description %></th>
-    <th><%=  Gender.find(:first, :conditions => "id = 2").description %></th>
+    <th>Male</th>
+    <th>Female</th>
     <th>Total</th>
-    <th><%=  RegistrationStatus.find(:first, :conditions => "id = 2").description %></th>
-    <th><%=  RegistrationStatus.find(:first, :conditions => "id = 1").description %></th>
-    <th><%=  RegistrationStatus.find(:first, :conditions => "id = 3").description %></th>
+    <th>Cancelled</th>
+    <th>Completed</th>
+    <th>Incomplete</th>
   </tr>
 
-  <% Campus.find(:all).each do |c| %>
+  <% campus_info.each_pair do |id, info| %>
   <tr>
+    <td><%= info[:name] %></td>
     <td>
-      <%= campus_info[c.id][:name] %>
-    </td>
-    <td>
+    <% if id != :total then %>
       Registrations
+    <% end %>
     </td>
-    <td>
-      <%= campus_info[c.id][:gender][1] %>
-    </td>
-    <td>
-      <%= campus_info[c.id][:gender][2] %>
-    </td>
-    <td>
-      <%= campus_info[c.id][:gender][1] + campus_info[c.id][:gender][2] %>
-    </td>
-    <td>
-      <%= campus_info[c.id][:status][2] %>
-    </td>
-    <td>
-      <%= campus_info[c.id][:status][1] %>
-    </td>
-    <td>
-      <%= campus_info[c.id][:status][3] %>
-    </td>
+    
+    <td><%= info[:gender][1] ||= 0 %></td>
+    <td><%= info[:gender][2] ||= 0 %></td>
+    <td><%= (info[:gender][0] ||= 0) + (info[:gender][1] ||= 0) + (info[:gender][2] ||= 0) %></td>
+
+    <td><%= info[:status][2] ||= 0 %></td>
+    <td><%= info[:status][1] ||= 0 %></td>
+    <td><%= info[:status][3] ||= 0 %></td>
   </tr>
   <% end %>
-
-  <tr>
-    <td>
-      Totals:
-    </td>
-    <td>
-    </td>
-    <td>
-      <%= campus_info[:total][:gender][1] %>
-    </td>
-    <td>
-      <%= campus_info[:total][:gender][2] %>
-    </td>
-    <td>
-      <%= campus_info[:total][:gender][1] + campus_info[:total][:gender][2] %>
-    </td>
-    <td>
-      <%= campus_info[:total][:status][2] %>
-    </td>
-    <td>
-      <%= campus_info[:total][:status][1] %>
-    </td>
-    <td>
-      <%= campus_info[:total][:status][3] %>
-    </td>
-  </tr>
 
 </table>
 

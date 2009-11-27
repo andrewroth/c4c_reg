@@ -9,7 +9,7 @@ tables:
   person: cim_hrdb_person
   registration: cim_reg_registration
   gender: cim_hrdb_gender
-  registration_status: cim_registration_status
+  registration_status: cim_reg_status
 
 assignment:
   id: assignment_id
