@@ -25,7 +25,7 @@ class Event < ActiveRecord::Base
                                   :select => "#{Campus.table_name}.#{_(:id, :campus)} AS campus_id, " +
                                              "#{Campus.table_name}.#{_(:description, :campus)} AS campus_description, " +
                                              "#{Person.table_name}.#{_(:id, :gender)} AS gender_id, " +
-                                             "#{Registration.table_name}.#{_(:status_id, :registration)} AS status_id, " +
+                                             "#{Registration.table_name}.#{_(:status_id, :registration)} AS registration_status_id, " +
                                              "#{Registration.table_name}.#{_(:id, :registration)} AS registration_id",
 
                                   :conditions => [ "#{Event.table_name}.#{_(:id, :event)} = ?", self.id ] )
@@ -41,12 +41,12 @@ class Event < ActiveRecord::Base
       merge_if_not_present( campus_info[assignment.campus_id.to_i][:gender], assignment.gender_id.to_i => 0 )
 
       # if we haven't encountered this registration_status yet add it to the campus_id hash
-      merge_if_not_present( campus_info[assignment.campus_id.to_i][:status], assignment.status_id.to_i => 0 )
+      merge_if_not_present( campus_info[assignment.campus_id.to_i][:status], assignment.registration_status_id.to_i => 0 )
 
       campus_info[assignment.campus_id.to_i][:gender][assignment.gender_id.to_i] += 1
-      campus_info[assignment.campus_id.to_i][:status][assignment.status_id.to_i] += 1
+      campus_info[assignment.campus_id.to_i][:status][assignment.registration_status_id.to_i] += 1
 
-      registrations.merge!( { assignment.registration_id => { :gender => assignment.gender_id, :status => assignment.status_id }} )
+      registrations.merge!( { assignment.registration_id => { :gender => assignment.gender_id, :status => assignment.registration_status_id }} )
     end
 
     # sort by campus name
