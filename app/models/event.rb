@@ -8,6 +8,19 @@ class Event < ActiveRecord::Base
   has_many :people, :through => :registrations
 
 
+  # return all events
+  #   order_field  symbol for field to sort by
+  #   order        optional, should be "ASC" or "DESC"
+  def self.get_all_events(order_field, order = "DESC")
+
+    order = order.upcase
+    order = "DESC" if (order != "ASC" && order != "DESC")
+
+    Event.find(:all, :order => _(order_field) + " " + order + ", " + _(:id) + " " + order)
+
+  end
+
+
   # get per-campus gender and registration status counts for this event
   # returns a hash of hashes
   def per_campus_event_info()

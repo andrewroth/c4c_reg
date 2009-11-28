@@ -1,41 +1,51 @@
 
+
+
+<%= link_to 'Back to all events', events_path %>
+
+<h2>Administrating Event:</h2>
+<h1><%=h @event.name %></h1>
+
 <% campus_info = @event.per_campus_event_info() %>
-
-<h1><%= @event.name %></h1>
-
 <table>
   <tr>
     <th>Campus</th>
-    <th>Admin</th>
+    <th>Total</th>
     <th>Male</th>
     <th>Female</th>
-    <th>Total</th>
     <th>Cancelled</th>
     <th>Completed</th>
     <th>Incomplete</th>
+    <th></th>
   </tr>
 
   <% campus_info.each_pair do |id, info| %>
   <tr>
-    <td><%= info[:name] %></td>
+    <td>
+    <% if id != :total then %>
+      <%=h info[:name] %>
+    <% else %>
+      Total (Unique) Registrations:
+    <% end %>
+    </td>
+    
+    <td><%=h (info[:gender][0] ||= 0) + (info[:gender][1] ||= 0) + (info[:gender][2] ||= 0) %></td>
+    <td><%=h info[:gender][1] ||= 0 %></td>
+    <td><%=h info[:gender][2] ||= 0 %></td>
+
+    <td><%=h info[:status][2] ||= 0 %></td>
+    <td><%=h info[:status][1] ||= 0 %></td>
+    <td><%=h info[:status][3] ||= 0 %></td>
+
     <td>
     <% if id != :total then %>
       Registrations
     <% end %>
     </td>
-    
-    <td><%= info[:gender][1] ||= 0 %></td>
-    <td><%= info[:gender][2] ||= 0 %></td>
-    <td><%= (info[:gender][0] ||= 0) + (info[:gender][1] ||= 0) + (info[:gender][2] ||= 0) %></td>
-
-    <td><%= info[:status][2] ||= 0 %></td>
-    <td><%= info[:status][1] ||= 0 %></td>
-    <td><%= info[:status][3] ||= 0 %></td>
   </tr>
   <% end %>
 
 </table>
 
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit this event\'s details', edit_event_path(@event) %>
