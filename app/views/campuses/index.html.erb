@@ -1,0 +1,34 @@
+<h1>Listing campuses</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Short description</th>
+    <th>Account group</th>
+    <th>Region</th>
+    <th>Website</th>
+    <th>Facebook group</th>
+    <th>Gcx namespace</th>
+    <th>Province</th>
+  </tr>
+
+<% @campuses.each do |campus| %>
+  <tr>
+    <td><%=h campus.description %></td>
+    <td><%=h campus.short_description %></td>
+    <td><%=h campus.account_group_id %></td>
+    <td><%=h campus.region_id %></td>
+    <td><%=h campus.website %></td>
+    <td><%=h campus.facebook_group %></td>
+    <td><%=h campus.gcx_namespace %></td>
+    <td><%=h campus.province_id %></td>
+    <td><%= link_to 'Show', campus %></td>
+    <td><%= link_to 'Edit', edit_campus_path(campus) %></td>
+    <td><%= link_to 'Destroy', campus, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New campus', new_campus_path %>

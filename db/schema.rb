@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091125203856) do
+ActiveRecord::Schema.define(:version => 20091130210939) do
 
   create_table "assignment_statuses", :force => true do |t|
     t.string "description", :limit => 64, :null => false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20091125203856) do
     t.integer "status_id", :default => 0, :null => false
   end
 
-  create_table "campus", :force => true do |t|
+  create_table "campuses", :force => true do |t|
     t.string  "description",       :limit => 128, :null => false
     t.string  "short_description", :limit => 50,  :null => false
     t.integer "account_group_id",                 :null => false

@@ -1,6 +1,4 @@
 
-
-
 <%= link_to 'Back to all events', events_path %>
 
 <h2>Administrating Event:</h2>
@@ -39,7 +37,7 @@
 
     <td>
     <% if id != :total then %>
-      Registrations
+      <%= link_to 'Registrations', event_campus_path(@event, id) %>
     <% end %>
     </td>
   </tr>
