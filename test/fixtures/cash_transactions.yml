@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  registration_id: 1
+  staff_name: MyString
+  received: 1
+  amount_paid: 1.5
+  date: 2009-11-30 20:44:01
+
+two:
+  registration_id: 1
+  staff_name: MyString
+  received: 1
+  amount_paid: 1.5
+  date: 2009-11-30 20:44:01

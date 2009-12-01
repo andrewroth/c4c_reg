@@ -1,0 +1,28 @@
+<h1>Listing cash_transactions</h1>
+
+<table>
+  <tr>
+    <th>Registration</th>
+    <th>Staff name</th>
+    <th>Received</th>
+    <th>Amount paid</th>
+    <th>Date</th>
+  </tr>
+
+<% @cash_transactions.each do |cash_transaction| %>
+  <tr>
+    <td><%=h cash_transaction.registration_id %></td>
+    <td><%=h cash_transaction.staff_name %></td>
+    <td><%=h cash_transaction.received %></td>
+    <td><%=h cash_transaction.amount_paid %></td>
+    <td><%=h cash_transaction.date %></td>
+    <td><%= link_to 'Show', cash_transaction %></td>
+    <td><%= link_to 'Edit', edit_cash_transaction_path(cash_transaction) %></td>
+    <td><%= link_to 'Destroy', cash_transaction, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New cash_transaction', new_cash_transaction_path %>

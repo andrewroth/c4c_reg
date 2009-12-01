@@ -1,0 +1,32 @@
+<h1>Editing cash_transaction</h1>
+
+<% form_for(@cash_transaction) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :registration_id %><br />
+    <%= f.text_field :registration_id %>
+  </p>
+  <p>
+    <%= f.label :staff_name %><br />
+    <%= f.text_field :staff_name %>
+  </p>
+  <p>
+    <%= f.label :received %><br />
+    <%= f.text_field :received %>
+  </p>
+  <p>
+    <%= f.label :amount_paid %><br />
+    <%= f.text_field :amount_paid %>
+  </p>
+  <p>
+    <%= f.label :date %><br />
+    <%= f.datetime_select :date %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @cash_transaction %> |
+<%= link_to 'Back', cash_transactions_path %>

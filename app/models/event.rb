@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
     registrations = ActiveSupport::OrderedHash.new # will contain a reference to each registration with it's status and that person's gender
     
 
-    assignments = Assignment.all( :joins => { :person => { :registrations => :event }, :campus => {}},
+    assignments = Assignment.all( :joins => { :person => { :registrations => :event }, :campus => {} },
 
                                   :select => "#{Campus.table_name}.#{_(:id, :campus)} AS campus_id, " +
                                              "#{Campus.table_name}.#{_(:description, :campus)} AS campus_description, " +
@@ -84,6 +84,13 @@ class Event < ActiveRecord::Base
     end
 
     campus_info
+  end
+  
+  
+  def get_registrations()
+    Registration.all(:joins => { :person => {}, :registration_status => {}, :cash_transaction => {} },
+    
+                     :conditions => [ "#{Registration.table_name}.#{_(:event_id, :registration)} = ?", self.id ] )
   end
 
 

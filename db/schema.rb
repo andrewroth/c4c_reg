@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091130210939) do
+ActiveRecord::Schema.define(:version => 20091201014401) do
 
   create_table "assignment_statuses", :force => true do |t|
     t.string "description", :limit => 64, :null => false
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(:version => 20091130210939) do
     t.string  "facebook_group",    :limit => 128, :null => false
     t.string  "gcx_namespace",     :limit => 128, :null => false
     t.integer "province_id"
+  end
+
+  create_table "cash_transactions", :force => true do |t|
+    t.integer  "registration_id",               :null => false
+    t.string   "staff_name",      :limit => 64, :null => false
+    t.integer  "received",                      :null => false
+    t.float    "amount_paid",                   :null => false
+    t.datetime "date",                          :null => false
   end
 
   create_table "events", :force => true do |t|

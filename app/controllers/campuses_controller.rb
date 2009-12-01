@@ -1,4 +1,8 @@
 class CampusesController < ApplicationController
+
+  before_filter :load_event
+
+
   # GET /campuses
   # GET /campuses.xml
   def index
@@ -82,4 +86,12 @@ class CampusesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+  private
+
+  def load_event
+    @event ||= Event.find(params[:event_id])
+  end
+
 end
