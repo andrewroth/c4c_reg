@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091201014401) do
+ActiveRecord::Schema.define(:version => 20091202164504) do
 
   create_table "assignment_statuses", :force => true do |t|
     t.string "description", :limit => 64, :null => false
@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(:version => 20091201014401) do
     t.integer "campus_id", :default => 0, :null => false
     t.integer "status_id", :default => 0, :null => false
   end
+
+  add_index "assignments", ["campus_id"], :name => "assignments_campus_id_fk"
+  add_index "assignments", ["person_id"], :name => "assignments_person_id_fk"
+  add_index "assignments", ["status_id"], :name => "assignments_status_id_fk"
 
   create_table "campuses", :force => true do |t|
     t.string  "description",       :limit => 128, :null => false
@@ -39,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20091201014401) do
     t.float    "amount_paid",                   :null => false
     t.datetime "date",                          :null => false
   end
+
+  add_index "cash_transactions", ["registration_id"], :name => "cash_transactions_registration_id_fk"
 
   create_table "events", :force => true do |t|
     t.integer  "country_id",                  :default => 0,     :null => false
@@ -89,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20091201014401) do
     t.string  "middle_name"
   end
 
+  add_index "people", ["gender_id"], :name => "people_gender_id_fk"
+
   create_table "registration_statuses", :force => true do |t|
     t.string "description", :limit => 32, :null => false
   end
@@ -101,5 +109,21 @@ ActiveRecord::Schema.define(:version => 20091201014401) do
     t.integer  "status_id",                 :default => 0,   :null => false
     t.float    "balance",                   :default => 0.0, :null => false
   end
+
+  add_index "registrations", ["event_id"], :name => "registrations_event_id_fk"
+  add_index "registrations", ["person_id"], :name => "registrations_person_id_fk"
+  add_index "registrations", ["status_id"], :name => "registrations_status_id_fk"
+
+  add_foreign_key "assignments", "assignment_statuses", :name => "assignments_status_id_fk", :column => "status_id", :dependent => :delete
+  add_foreign_key "assignments", "campuses", :name => "assignments_campus_id_fk", :dependent => :delete
+  add_foreign_key "assignments", "people", :name => "assignments_person_id_fk", :dependent => :delete
+
+  add_foreign_key "cash_transactions", "registrations", :name => "cash_transactions_registration_id_fk", :dependent => :delete
+
+  add_foreign_key "people", "genders", :name => "people_gender_id_fk", :dependent => :delete
+
+  add_foreign_key "registrations", "events", :name => "registrations_event_id_fk", :dependent => :delete
+  add_foreign_key "registrations", "people", :name => "registrations_person_id_fk", :dependent => :delete
+  add_foreign_key "registrations", "registration_statuses", :name => "registrations_status_id_fk", :column => "status_id", :dependent => :delete
 
 end

@@ -1,8 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  
   map.resources :cash_transactions
-
-
-  map.root :controller => 'events'
 
   map.resources :people
 
@@ -10,6 +8,10 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :campuses
     event.resources :registrations
   end
+  
+  
+  map.root :controller => 'events'
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
 
