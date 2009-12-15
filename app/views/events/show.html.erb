@@ -4,44 +4,53 @@
 <h2>Administrating Event:</h2>
 <h1><%=h @event.name %></h1>
 
-<% campus_info = @event.per_campus_event_info() %>
 <table>
   <tr>
     <th>Campus</th>
     <th>Total</th>
-    <th>Male</th>
-    <th>Female</th>
-    <th>Cancelled</th>
-    <th>Completed</th>
-    <th>Incomplete</th>
+    <th><%=h Gender::MALE %></th>
+    <th><%=h Gender::FEMALE %> </th>
+    <th><%=h RegistrationStatus::CANCELLED %></th>
+    <th><%=h RegistrationStatus::REGISTERED %></th>
+    <th><%=h RegistrationStatus::INCOMPLETE %></th>
     <th></th>
   </tr>
 
-  <% campus_info.each_pair do |id, info| %>
+  <% @per_campus_info.each_pair do |id, campus_info| %>
   <tr>
     <td>
-    <% if id != :total then %>
-      <%=h info[:name] %>
-    <% else %>
-      Total (Unique) Registrations:
-    <% end %>
+      <%=h campus_info[:name] %>
     </td>
     
-    <td><%=h (info[:gender][0] ||= 0) + (info[:gender][1] ||= 0) + (info[:gender][2] ||= 0) %></td>
-    <td><%=h info[:gender][1] ||= 0 %></td>
-    <td><%=h info[:gender][2] ||= 0 %></td>
+    <td><%=h campus_info[:gender][:unknown] + campus_info[:gender][:male] + campus_info[:gender][:female] %></td>
+    <td><%=h campus_info[:gender][:male] %></td>
+    <td><%=h campus_info[:gender][:female] %></td>
 
-    <td><%=h info[:status][2] ||= 0 %></td>
-    <td><%=h info[:status][1] ||= 0 %></td>
-    <td><%=h info[:status][3] ||= 0 %></td>
+    <td><%=h campus_info[:status][:cancelled] %></td>
+    <td><%=h campus_info[:status][:registered] %></td>
+    <td><%=h campus_info[:status][:incomplete] %></td>
 
     <td>
-    <% if id != :total then %>
       <%= link_to 'Registrations', event_campus_path(@event, id) %>
-    <% end %>
     </td>
   </tr>
   <% end %>
+
+  <tr>
+    <td>
+      Total (unique) Registrations:
+    </td>
+
+    <td><%=h @event_totals[:gender][:unknown] + @event_totals[:gender][:male] +  @event_totals[:gender][:female] %></td>
+    <td><%=h @event_totals[:gender][:male] %></td>
+    <td><%=h @event_totals[:gender][:female] %></td>
+
+    <td><%=h @event_totals[:status][:cancelled] %></td>
+    <td><%=h @event_totals[:status][:registered] %></td>
+    <td><%=h @event_totals[:status][:incomplete] %></td>
+
+    <td></td>
+  </tr>
 
 </table>
 

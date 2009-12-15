@@ -1,11 +1,10 @@
+
 <h2><%=h @campus.description %> registrations for: <%=h @event.name %></h2>
-
-
 
 <table>
   <tr>
-    <th>Last Name</th>
     <th>Frist Name</th>
+    <th>Last Name</th>
     <th>Registration Date</th>
     <th>Email</th>
     <th>Cash Received</th>
@@ -15,9 +14,19 @@
     <th></th>
   </tr>
 
-<% @event.get_registrations().each do |registration| %>
-  
-  <tr><%=h registration.id %></tr>
-  
-<% end %>
+
+  <% @registrations.each do |reg| %>
+
+  <tr>
+    <td><%=h reg.person.first_name %></td>
+    <td><%=h reg.person.last_name %></td>
+    <td><%=h reg.date %></td>
+    <td><%=h reg.person.email %></td>
+    <td><%=h reg.cash_received %></td>
+    <td><%=h reg.staff_names_for_cash_transactions %></td>
+    <td><%=h reg.registration_status_assoc.description %></td>
+    <td><%=h reg.balance %></td>
+  </tr>
+
+  <% end %>
 </table>

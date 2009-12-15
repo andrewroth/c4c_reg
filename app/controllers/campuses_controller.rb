@@ -18,6 +18,7 @@ class CampusesController < ApplicationController
   # GET /campuses/1.xml
   def show
     @campus = Campus.find(params[:id])
+    @registrations = @event.registrations_from_campus(@campus)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -95,3 +96,4 @@ class CampusesController < ApplicationController
   end
 
 end
+

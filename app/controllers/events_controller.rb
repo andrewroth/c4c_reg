@@ -15,6 +15,9 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
 
+    @per_campus_info = @event.per_campus_event_info()
+    @event_totals = @event.info_totals()
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @event }
