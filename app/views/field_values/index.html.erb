@@ -1,0 +1,26 @@
+<h1>Listing field_values</h1>
+
+<table>
+  <tr>
+    <th>Field</th>
+    <th>Value</th>
+    <th>Registration</th>
+    <th>Updated at</th>
+  </tr>
+
+<% @field_values.each do |field_value| %>
+  <tr>
+    <td><%=h field_value.field_id %></td>
+    <td><%=h field_value.value %></td>
+    <td><%=h field_value.registration_id %></td>
+    <td><%=h field_value.updated_at %></td>
+    <td><%= link_to 'Show', field_value %></td>
+    <td><%= link_to 'Edit', edit_field_value_path(field_value) %></td>
+    <td><%= link_to 'Destroy', field_value, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New field_value', new_field_value_path %>

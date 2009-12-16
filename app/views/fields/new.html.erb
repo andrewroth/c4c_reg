@@ -1,0 +1,43 @@
+<h1>New field</h1>
+
+<% form_for(@field) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :type_id %><br />
+    <%= f.text_field :type_id %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :event_id %><br />
+    <%= f.text_field :event_id %>
+  </p>
+  <p>
+    <%= f.label :priority %><br />
+    <%= f.text_field :priority %>
+  </p>
+  <p>
+    <%= f.label :required %><br />
+    <%= f.text_field :required %>
+  </p>
+  <p>
+    <%= f.label :invalid %><br />
+    <%= f.text_field :invalid %>
+  </p>
+  <p>
+    <%= f.label :hidden %><br />
+    <%= f.text_field :hidden %>
+  </p>
+  <p>
+    <%= f.label :data_type_id %><br />
+    <%= f.text_field :data_type_id %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', fields_path %>

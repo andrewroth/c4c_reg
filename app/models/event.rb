@@ -5,8 +5,9 @@ class Event < ActiveRecord::Base
   load_mappings
 
   has_many :registrations, :class_name => "Registration", :foreign_key => _(:event_id, :registration)
+  has_many :price_rules, :class_name => "PriceRule", :foreign_key => _(:event_id, :price_rule)
+  has_many :fields, :class_name => "Field", :foreign_key => _(:event_id, :field)
   has_many :people, :through => :registrations
-
 
 
   # return all events
@@ -33,8 +34,8 @@ class Event < ActiveRecord::Base
     info_totals = { :gender => { :male => 0, :female => 0, :unknown => 0 },
                     :status => { :cancelled => 0, :registered => 0, :incomplete => 0 } }
 
-    info_totals[:gender][:male]      = registrations.find_all{ |registration| registration.gender == Gender::MALE }.size
-    info_totals[:gender][:female]    = registrations.find_all{ |registration| registration.gender == Gender::FEMALE }.size
+    info_totals[:gender][:male]       = registrations.find_all{ |registration| registration.gender == Gender::MALE }.size
+    info_totals[:gender][:female]     = registrations.find_all{ |registration| registration.gender == Gender::FEMALE }.size
     info_totals[:gender][:unknown]    = registrations.find_all{ |registration| registration.gender == Gender::UNKNOWN }.size
     info_totals[:status][:cancelled]  = registrations.find_all{ |registration| registration.status == RegistrationStatus::CANCELLED }.size
     info_totals[:status][:registered] = registrations.find_all{ |registration| registration.status == RegistrationStatus::REGISTERED }.size
@@ -66,7 +67,8 @@ class Event < ActiveRecord::Base
                                :conditions => [ "#{__(:event_id, :registration)} = ?", self.id ] )
     
     campuses.each do |campus|
-      campus_info.merge!( campus.campusID => { :name => "", :gender => { :male => 0, :female => 0, :unknown => 0 }, :status => { :cancelled => 0, :registered => 0, :incomplete => 0 } } )
+      campus_info.merge!( campus.campusID => { :name => "", :gender => { :male => 0, :female => 0, :unknown => 0 },
+                                                            :status => { :cancelled => 0, :registered => 0, :incomplete => 0 } } )
 
       campus_info[campus.campusID][:name] = campus.name
       campus_info[campus.campusID][:gender][:male] = campus.males.to_i

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event_id: 1
+  type_id: 1
+  description: MyText
+  field_id: 1
+  value: MyString
+  discount: 1.5
+
+two:
+  event_id: 1
+  type_id: 1
+  description: MyText
+  field_id: 1
+  value: MyString
+  discount: 1.5

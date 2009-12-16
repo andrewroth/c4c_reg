@@ -1,0 +1,30 @@
+<h1>Listing price_rules</h1>
+
+<table>
+  <tr>
+    <th>Event</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Field</th>
+    <th>Value</th>
+    <th>Discount</th>
+  </tr>
+
+<% @price_rules.each do |price_rule| %>
+  <tr>
+    <td><%=h price_rule.event_id %></td>
+    <td><%=h price_rule.type_id %></td>
+    <td><%=h price_rule.description %></td>
+    <td><%=h price_rule.field_id %></td>
+    <td><%=h price_rule.value %></td>
+    <td><%=h price_rule.discount %></td>
+    <td><%= link_to 'Show', price_rule %></td>
+    <td><%= link_to 'Edit', edit_price_rule_path(price_rule) %></td>
+    <td><%= link_to 'Destroy', price_rule, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New price_rule', new_price_rule_path %>

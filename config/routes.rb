@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :fields
+
+  map.resources :field_values
+
+  map.resources :price_rules
+
   
   map.resources :cash_transactions
 

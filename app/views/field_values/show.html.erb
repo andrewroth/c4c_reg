@@ -1,0 +1,23 @@
+<p>
+  <b>Field:</b>
+  <%=h @field_value.field_id %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%=h @field_value.value %>
+</p>
+
+<p>
+  <b>Registration:</b>
+  <%=h @field_value.registration_id %>
+</p>
+
+<p>
+  <b>Updated at:</b>
+  <%=h @field_value.updated_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_field_value_path(@field_value) %> |
+<%= link_to 'Back', field_values_path %>

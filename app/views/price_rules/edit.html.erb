@@ -1,0 +1,36 @@
+<h1>Editing price_rule</h1>
+
+<% form_for(@price_rule) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :event_id %><br />
+    <%= f.text_field :event_id %>
+  </p>
+  <p>
+    <%= f.label :type_id %><br />
+    <%= f.text_field :type_id %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :field_id %><br />
+    <%= f.text_field :field_id %>
+  </p>
+  <p>
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </p>
+  <p>
+    <%= f.label :discount %><br />
+    <%= f.text_field :discount %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @price_rule %> |
+<%= link_to 'Back', price_rules_path %>

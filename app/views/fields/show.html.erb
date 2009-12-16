@@ -1,0 +1,43 @@
+<p>
+  <b>Type:</b>
+  <%=h @field.type_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @field.description %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%=h @field.event_id %>
+</p>
+
+<p>
+  <b>Priority:</b>
+  <%=h @field.priority %>
+</p>
+
+<p>
+  <b>Required:</b>
+  <%=h @field.required %>
+</p>
+
+<p>
+  <b>Invalid:</b>
+  <%=h @field.invalid %>
+</p>
+
+<p>
+  <b>Hidden:</b>
+  <%=h @field.hidden %>
+</p>
+
+<p>
+  <b>Data type:</b>
+  <%=h @field.data_type_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_field_path(@field) %> |
+<%= link_to 'Back', fields_path %>

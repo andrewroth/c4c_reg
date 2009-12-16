@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type_id: 1
+  description: MyText
+  event_id: 1
+  priority: 1
+  required: 1
+  invalid: MyString
+  hidden: 1
+  data_type_id: 1
+
+two:
+  type_id: 1
+  description: MyText
+  event_id: 1
+  priority: 1
+  required: 1
+  invalid: MyString
+  hidden: 1
+  data_type_id: 1

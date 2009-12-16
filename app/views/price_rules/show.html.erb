@@ -1,0 +1,33 @@
+<p>
+  <b>Event:</b>
+  <%=h @price_rule.event_id %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @price_rule.type_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @price_rule.description %>
+</p>
+
+<p>
+  <b>Field:</b>
+  <%=h @price_rule.field_id %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%=h @price_rule.value %>
+</p>
+
+<p>
+  <b>Discount:</b>
+  <%=h @price_rule.discount %>
+</p>
+
+
+<%= link_to 'Edit', edit_price_rule_path(@price_rule) %> |
+<%= link_to 'Back', price_rules_path %>

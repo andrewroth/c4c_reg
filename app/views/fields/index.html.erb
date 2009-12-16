@@ -1,0 +1,34 @@
+<h1>Listing fields</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Event</th>
+    <th>Priority</th>
+    <th>Required</th>
+    <th>Invalid</th>
+    <th>Hidden</th>
+    <th>Data type</th>
+  </tr>
+
+<% @fields.each do |field| %>
+  <tr>
+    <td><%=h field.type_id %></td>
+    <td><%=h field.description %></td>
+    <td><%=h field.event_id %></td>
+    <td><%=h field.priority %></td>
+    <td><%=h field.required %></td>
+    <td><%=h field.invalid %></td>
+    <td><%=h field.hidden %></td>
+    <td><%=h field.data_type_id %></td>
+    <td><%= link_to 'Show', field %></td>
+    <td><%= link_to 'Edit', edit_field_path(field) %></td>
+    <td><%= link_to 'Destroy', field, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New field', new_field_path %>
