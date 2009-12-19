@@ -6,6 +6,11 @@ FieldValue.seed_many([
     :registration_id => 1
   },
   {
+    :field_id => 1,
+    :value => 2,
+    :registration_id => 2
+  },
+  {
     :field_id => 2,
     :value => "",
     :registration_id => 3

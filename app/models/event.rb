@@ -5,8 +5,8 @@ class Event < ActiveRecord::Base
   load_mappings
 
   has_many :registrations, :class_name => "Registration", :foreign_key => _(:event_id, :registration)
-  has_many :price_rules, :class_name => "PriceRule", :foreign_key => _(:event_id, :price_rule)
-  has_many :fields, :class_name => "Field", :foreign_key => _(:event_id, :field)
+  has_many :price_rules, :foreign_key => _(:event_id, :price_rule)
+  has_many :fields, :foreign_key => _(:event_id, :field)
   has_many :people, :through => :registrations
 
 
@@ -88,13 +88,13 @@ class Event < ActiveRecord::Base
 
   def registrations_from_campus(campus)
 
-    Registration.all( :include => [ { :person => { :assignments => :campus } }, :registration_status_assoc, :cash_transactions ],
+    self.registrations.all( :include => [ { :person => { :assignments => :campus } }, :registration_status_assoc, :cash_transactions ],
 
-                      :select => "#{__(:id, :campus)}, #{__(:first_name, :person)}, #{__(:last_name, :person)}, #{__(:email, :person)}, " +
-                                 "#{__(:received, :cash_transaction)}, #{__(:staff_name, :cash_transaction)}, " +
-                                 "#{__(:description, :registration_status)}, #{__(:date, :registration)}, #{__(:balance, :registration)}, #{__(:id, :registration)}",
+                            :select => "#{__(:id, :campus)}, #{__(:first_name, :person)}, #{__(:last_name, :person)}, #{__(:email, :person)}, " +
+                                       "#{__(:received, :cash_transaction)}, #{__(:staff_name, :cash_transaction)}, " +
+                                       "#{__(:description, :registration_status)}, #{__(:date, :registration)}, #{__(:balance, :registration)}, #{__(:id, :registration)}",
 
-                      :conditions => [ "#{__(:event_id, :registration)} = ? AND #{__(:id, :campus)} = ?", self.id, campus.id ] )
+                            :conditions => [ "#{__(:id, :campus)} = ?", campus.id ] )
   end
 
 

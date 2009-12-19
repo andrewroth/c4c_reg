@@ -35,6 +35,14 @@ class RegistrationsController < ApplicationController
   # GET /registrations/1/edit
   def edit
     @registration = Registration.find(params[:id])
+    @event ||= Event.find(params[:event_id])
+
+    @price_info = {}
+    @price_info[:rules] = @registration.get_applicable_rules()
+    @price_info[:base_price] = @registration.get_base_price_from_rules(@price_info[:rules])
+    @price_info[:total_cash_paid] = @registration.get_total_cash_paid()
+    
+
   end
 
   # POST /registrations

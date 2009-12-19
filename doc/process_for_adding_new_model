@@ -1,0 +1,71 @@
+Suggested Process for Adding a New Model
+----------------------------------------
+
+1. Create new model with generator.
+   e.g.
+     script/generate scaffold ModelNamePlural record_column:data_type
+       or
+     script/generate model ModelNameSingular record_column:data_type
+
+
+2. Then edit the generated migration to make sure it's okay (e.g. add in necessary not null, default or limit properties).
+   And you may want to remove the timestamps that rails puts in automatically.
+   (Rails migration cheat sheet: http://dizzy.co.uk/ruby_on_rails/cheatsheets/rails-migrations)
+   e.g.
+     :null => false, :limit => 128, :default => 0
+  
+
+3. Create necessary relationship associations in the generated model rb.
+   e.g.
+     belongs_to :person, :foreign_key => _(:person_id)
+     has_many :cash_transactions, :foreign_key => _(:registration_id, :cash_transaction)
+
+
+4. Update database foreign key migration using Foreigner plugin (*_add_foreign_keys.rb).
+   e.g.
+     add_foreign_key(:registrations, :people, :dependent => :delete)
+  
+     remove_foreign_key(:registrations, :people)
+  
+  
+5. Create seed fixture for new table using Seed_fu plugin.
+   e.g.
+     Registration.seed_many([
+      {
+        :id => 1,
+        :event_id => "1",
+        :person_id => "1",
+        :date => "2010-09-01",
+        :confirm_num => "E60R8899C79",
+        :status_id => "2",
+        :balance => "10"
+      }
+    ])
+
+
+6. Add new table to mappings.yml if needed.
+   e.g.
+     databases:
+       cim_prod: assignment
+       
+     assignment:
+       id: assignment_id
+       status_id: assignmentstatus_id 
+
+
+7. Modify routes.rb as needed (you may just want to delete the auto-generated resource routes).
+
+
+8. Migrate to version 0 (to prepare for new seeds) and back to newest version to apply all changes.
+   e.g.
+     rake db:migrate VERSION=0
+     rake db:migrate
+     
+
+9. Do seeding with Seed_fu.
+   e.g.
+     rake db:seed_fu
+     
+
+
+
