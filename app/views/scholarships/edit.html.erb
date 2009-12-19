@@ -1,0 +1,28 @@
+<h1>Editing scholarship</h1>
+
+<% form_for(@scholarship) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :registration_id %><br />
+    <%= f.text_field :registration_id %>
+  </p>
+  <p>
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+  </p>
+  <p>
+    <%= f.label :source_account %><br />
+    <%= f.text_field :source_account %>
+  </p>
+  <p>
+    <%= f.label :source_description %><br />
+    <%= f.text_field :source_description %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @scholarship %> |
+<%= link_to 'Back', scholarships_path %>

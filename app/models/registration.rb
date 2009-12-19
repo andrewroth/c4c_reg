@@ -2,9 +2,10 @@ class Registration < ActiveRecord::Base
 
   load_mappings
 
-  belongs_to :event, :class_name => "Event", :foreign_key => _(:event_id)
-  belongs_to :person, :class_name => "Person", :foreign_key => _(:person_id)
-  has_many :cash_transactions, :class_name => "CashTransaction", :foreign_key => _(:registration_id, :cash_transaction)
+  belongs_to :event, :foreign_key => _(:event_id)
+  belongs_to :person, :foreign_key => _(:person_id)
+  has_many :cash_transactions, :foreign_key => _(:registration_id, :cash_transaction)
+  has_many :scholarships, :foreign_key => _(:registration_id, :scholarship)
 
   # NOTE: registration_status is the registration foreign key in the legacy db (through db_mappings) while it is also the conventional name for this association
   #       but if they remain the same strange things will happen, so we must name it something else here!
@@ -55,6 +56,8 @@ class Registration < ActiveRecord::Base
   end
 
 
-  def get_total_scholarship
+  def get_total_scholarship()
+
+  end
 
 end

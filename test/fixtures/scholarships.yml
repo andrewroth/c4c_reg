@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  registration_id: 1
+  amount: 1.5
+  source_account: MyString
+  source_description: MyString
+
+two:
+  registration_id: 1
+  amount: 1.5
+  source_account: MyString
+  source_description: MyString

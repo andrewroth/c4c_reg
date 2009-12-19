@@ -4,7 +4,7 @@ module EventsHelper
 
     date = ""
 
-    if event.start != nil && event.end != nil then
+    begin
 
       start_date = Date.parse(event.start.to_s)
       end_date = Date.parse(event.end.to_s)
@@ -17,7 +17,7 @@ module EventsHelper
         date = start_date.strftime("%B %e, %Y")
       end
 
-    else
+    rescue
       date = "Unknown"
     end
 

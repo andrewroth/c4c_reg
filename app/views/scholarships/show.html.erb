@@ -1,0 +1,23 @@
+<p>
+  <b>Registration:</b>
+  <%=h @scholarship.registration_id %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%=h @scholarship.amount %>
+</p>
+
+<p>
+  <b>Source account:</b>
+  <%=h @scholarship.source_account %>
+</p>
+
+<p>
+  <b>Source description:</b>
+  <%=h @scholarship.source_description %>
+</p>
+
+
+<%= link_to 'Edit', edit_scholarship_path(@scholarship) %> |
+<%= link_to 'Back', scholarships_path %>

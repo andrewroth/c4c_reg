@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
 
   load_mappings
 
-  has_many :registrations, :class_name => "Registration", :foreign_key => _(:event_id, :registration)
+  has_many :registrations, :foreign_key => _(:event_id, :registration)
   has_many :price_rules, :foreign_key => _(:event_id, :price_rule)
   has_many :fields, :foreign_key => _(:event_id, :field)
   has_many :people, :through => :registrations

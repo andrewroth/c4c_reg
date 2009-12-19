@@ -1,0 +1,26 @@
+<h1>Listing scholarships</h1>
+
+<table>
+  <tr>
+    <th>Registration</th>
+    <th>Amount</th>
+    <th>Source account</th>
+    <th>Source description</th>
+  </tr>
+
+<% @scholarships.each do |scholarship| %>
+  <tr>
+    <td><%=h scholarship.registration_id %></td>
+    <td><%=h scholarship.amount %></td>
+    <td><%=h scholarship.source_account %></td>
+    <td><%=h scholarship.source_description %></td>
+    <td><%= link_to 'Show', scholarship %></td>
+    <td><%= link_to 'Edit', edit_scholarship_path(scholarship) %></td>
+    <td><%= link_to 'Destroy', scholarship, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New scholarship', new_scholarship_path %>

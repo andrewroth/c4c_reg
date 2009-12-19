@@ -1,9 +1,17 @@
+
 Suggested Process for Adding a New Model
 ----------------------------------------
 
+
+0. Migrate to version 0 to prepare for foreign keys and seed_fu
+   (if you don't do this now you may just have to manually drop all tables in the database later)
+   e.g.
+     rake db:migrate VERSION=0
+
+
 1. Create new model with generator.
    e.g.
-     script/generate scaffold ModelNamePlural record_column:data_type
+     script/generate scaffold ModelNameSingular record_column:data_type
        or
      script/generate model ModelNameSingular record_column:data_type
 
@@ -21,14 +29,14 @@ Suggested Process for Adding a New Model
      has_many :cash_transactions, :foreign_key => _(:registration_id, :cash_transaction)
 
 
-4. Update database foreign key migration using Foreigner plugin (*_add_foreign_keys.rb).
+4. Update database foreign key migration using foreigner plugin and change the date in the filename (there can be only one).
    e.g.
      add_foreign_key(:registrations, :people, :dependent => :delete)
   
      remove_foreign_key(:registrations, :people)
   
   
-5. Create seed fixture for new table using Seed_fu plugin.
+5. Create seed fixture for new table using seed_fu plugin (seed fixtures are applied in alphabetical order).
    e.g.
      Registration.seed_many([
       {
@@ -43,7 +51,7 @@ Suggested Process for Adding a New Model
     ])
 
 
-6. Add new table to mappings.yml if needed.
+6. Add new table to mappings.yml.
    e.g.
      databases:
        cim_prod: assignment
@@ -56,13 +64,13 @@ Suggested Process for Adding a New Model
 7. Modify routes.rb as needed (you may just want to delete the auto-generated resource routes).
 
 
-8. Migrate to version 0 (to prepare for new seeds) and back to newest version to apply all changes.
+8. Migrate to apply all changes.
    e.g.
-     rake db:migrate VERSION=0
      rake db:migrate
      
 
-9. Do seeding with Seed_fu.
+9. Do seeding with seed_fu.
+   (NOTE: seed_fu will not work when db_mappings are in use, move/remove the mappings.yml file before running the rake)
    e.g.
      rake db:seed_fu
      

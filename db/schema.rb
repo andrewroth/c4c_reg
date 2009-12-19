@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091216014618) do
+ActiveRecord::Schema.define(:version => 20091219215907) do
 
   create_table "assignment_statuses", :force => true do |t|
     t.string "description", :limit => 64, :null => false
@@ -165,6 +165,15 @@ ActiveRecord::Schema.define(:version => 20091216014618) do
   add_index "registrations", ["person_id"], :name => "registrations_person_id_fk"
   add_index "registrations", ["status_id"], :name => "registrations_status_id_fk"
 
+  create_table "scholarships", :force => true do |t|
+    t.integer "registration_id",                   :default => 0,   :null => false
+    t.float   "amount",                            :default => 0.0, :null => false
+    t.string  "source_account",     :limit => 64,                   :null => false
+    t.string  "source_description", :limit => 128,                  :null => false
+  end
+
+  add_index "scholarships", ["registration_id"], :name => "scholarships_registration_id_fk"
+
   add_foreign_key "assignments", "assignment_statuses", :name => "assignments_status_id_fk", :column => "status_id", :dependent => :delete
   add_foreign_key "assignments", "campuses", :name => "assignments_campus_id_fk", :dependent => :delete
   add_foreign_key "assignments", "people", :name => "assignments_person_id_fk", :dependent => :delete
@@ -187,5 +196,7 @@ ActiveRecord::Schema.define(:version => 20091216014618) do
   add_foreign_key "registrations", "events", :name => "registrations_event_id_fk", :dependent => :delete
   add_foreign_key "registrations", "people", :name => "registrations_person_id_fk", :dependent => :delete
   add_foreign_key "registrations", "registration_statuses", :name => "registrations_status_id_fk", :column => "status_id", :dependent => :delete
+
+  add_foreign_key "scholarships", "registrations", :name => "scholarships_registration_id_fk", :dependent => :delete
 
 end
