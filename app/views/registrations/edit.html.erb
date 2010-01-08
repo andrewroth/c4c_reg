@@ -1,8 +1,110 @@
 <h1>Editing registration</h1>
 
+
+<% form_for :registration, :url => {:action => :update}, :html => {:method => :put} do |form| %>
+  <p>
+    <%= form.label(:status_id, 'Current registration status:') %>
+    <%= form.select(:status_id, @registration_statuses) %>
+    <%= form.submit 'Update' %>
+  </p>
+<% end %>
+
+
 <h2>Pricing</h2>
 
+no credit card stuff yet
 
-<p>Total cost for this registrant: <%= @price_info[:base_price] %></p>
-<p>Total paid: <%= @price_info[:amount_paid] %></p>
-<p>Balance owing: <%= @price_info[:amount_owed] %></p>
+<p>Total cost for this registrant: <%=h number_to_currency(@price_info[:base_price]) %></p>
+<p>Total paid: <%=h number_to_currency(@price_info[:amount_paid]) %></p>
+<p>Balance owing: <%=h number_to_currency(@price_info[:balance_owed]) %></p>
+
+<p>Rules applied to calculate base price:</p>
+<% @price_info[:rules].each_pair do |id, rule| %>
+  <p>
+  <%=h rule[:description] %>
+  <%=h number_to_currency(rule[:discount]) %>
+  </p>
+<% end %>
+
+
+<p>
+<h3>Scholarships</h3>
+<table>
+  <tr>
+    <th>Source Description</th>
+    <th>Source Account</th>
+    <th>Amount</th>
+    <th></th>
+  </tr>
+
+  <% @scholarships.each do |scholarship| %>
+  <tr>
+    <td><%=h scholarship.source_description %></td>
+    <td><%=h scholarship.source_account %></td>
+    <td><%=h number_to_currency(scholarship.amount) %></td>
+    <td></td>
+  </tr>
+  <% end %>
+
+  <tr>
+    <td>Total:</td>
+    <td></td>
+    <td><%=h number_to_currency(@price_info[:total_scholarship_worth]) %></td>
+    <td></td>
+  </tr>
+</table>
+</p>
+
+
+<p>
+<h3>Cash Transactions</h3>
+<table>
+  <tr>
+    <th>Staff Name</th>
+    <th>Cash Received</th>
+    <th>Amount</th>
+    <th></th>
+  </tr>
+
+  <% @cash_transactions.each do |cash_transaction| %>
+  <tr>
+    <td><%=h cash_transaction.staff_name %></td>
+    <td><%=h cash_transaction.received %></td>
+    <td><%=h number_to_currency(cash_transaction.amount_paid) %></td>
+    <td></td>
+  </tr>
+  <% end %>
+
+  <tr>
+    <td>Total Received:</td>
+    <td></td>
+    <td><%=h number_to_currency(@price_info[:total_cash_paid]) %></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>Total Not Received:</td>
+    <td></td>
+    <td><%=h number_to_currency(@price_info[:total_cash_owed]) %></td>
+    <td></td>
+  </tr>
+</table>
+</p>
+
+
+<p>
+<h3>Event Info</h3>
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Value</th>
+  </tr>
+
+  <% @event_fields.each do |field| %>
+  <tr>
+    <td><%= field.description %></td>
+    <td><%=h field.value %></td>
+  </tr>
+  <% end %>
+</table>
+</p>

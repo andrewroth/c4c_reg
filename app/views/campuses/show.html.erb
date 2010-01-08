@@ -25,7 +25,7 @@
     <td><%=h reg.cash_received %></td>
     <td><%=h reg.staff_names_for_cash_transactions %></td>
     <td><%=h reg.registration_status_assoc.description %></td>
-    <td><%=h reg.balance %></td>
+    <td><%=h number_to_currency(reg.balance) %></td>
     <td><%= link_to 'Edit', edit_event_registration_path(@event, reg.id) %></td>
   </tr>
 

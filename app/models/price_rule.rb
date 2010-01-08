@@ -43,14 +43,10 @@ class PriceRule < ActiveRecord::Base
 
 
   def date_rule_applies_to_registration?(registration)
-    begin
       rule_time = Time.parse(self.value)
       registration_time = Time.parse(registration.date.to_s)
 
       registration_time <= rule_time ? true : false
-    rescue
-      STDERR.puts "Couldn't parse strings #{self.value} and #{registration.date.to_s} to Time"
-    end
   end
 
 

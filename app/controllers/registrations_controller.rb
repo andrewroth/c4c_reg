@@ -32,18 +32,36 @@ class RegistrationsController < ApplicationController
     end
   end
 
+
   # GET /registrations/1/edit
   def edit
     @registration = Registration.find(params[:id])
     @event ||= Event.find(params[:event_id])
+    @registration_statuses = RegistrationStatus.get_all_statuses("description", "ASC").map { |s| [s.description, s.id] }
 
     @price_info = {}
     @price_info[:rules] = @registration.get_applicable_rules()
     @price_info[:base_price] = @registration.get_base_price_from_rules(@price_info[:rules])
-    @price_info[:total_cash_paid] = @registration.get_total_cash_paid()
     
+    @price_info[:total_cash_paid] = @registration.get_total_cash_paid()
+    @price_info[:total_cash_owed] = @registration.get_total_cash_owed()
 
+    @price_info[:total_scholarship_worth] = @registration.get_total_scholarship()
+
+    @price_info[:amount_paid] = @price_info[:total_cash_paid].to_f + @price_info[:total_scholarship_worth].to_f
+    @price_info[:balance_owed] = @price_info[:base_price].to_f - @price_info[:amount_paid].to_f
+
+    @scholarships = @registration.scholarships
+    @cash_transactions = @registration.cash_transactions
+
+    @event_fields = @registration.get_event_field()
+
+  #rescue
+    #logger.error "EXCEPTION when loading registration with id #{params[:id]}"
+    #flash[:notice] = "Could not load registration information!"
+    #redirect_to :back
   end
+
 
   # POST /registrations
   # POST /registrations.xml
@@ -62,6 +80,7 @@ class RegistrationsController < ApplicationController
     end
   end
 
+
   # PUT /registrations/1
   # PUT /registrations/1.xml
   def update
@@ -70,7 +89,7 @@ class RegistrationsController < ApplicationController
     respond_to do |format|
       if @registration.update_attributes(params[:registration])
         flash[:notice] = 'Registration was successfully updated.'
-        format.html { redirect_to(@registration) }
+        format.html { redirect_to :action => "edit" }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -79,6 +98,7 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  
   # DELETE /registrations/1
   # DELETE /registrations/1.xml
   def destroy
