@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091219215907) do
+ActiveRecord::Schema.define(:version => 20100108205359) do
 
   create_table "assignment_statuses", :force => true do |t|
     t.string "description", :limit => 64, :null => false
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20091219215907) do
   end
 
   add_index "people", ["gender_id"], :name => "people_gender_id_fk"
+  add_index "people", ["province_id"], :name => "people_province_id_fk"
 
   create_table "price_rule_types", :force => true do |t|
     t.string "description", :limit => 128, :null => false
@@ -147,6 +148,12 @@ ActiveRecord::Schema.define(:version => 20091219215907) do
   add_index "price_rules", ["event_id"], :name => "price_rules_event_id_fk"
   add_index "price_rules", ["field_id"], :name => "price_rules_field_id_fk"
   add_index "price_rules", ["type_id"], :name => "price_rules_type_id_fk"
+
+  create_table "provinces", :force => true do |t|
+    t.string  "description",       :limit => 50, :null => false
+    t.string  "short_description", :limit => 50, :null => false
+    t.integer "country_id"
+  end
 
   create_table "registration_statuses", :force => true do |t|
     t.string "description", :limit => 32, :null => false
@@ -188,6 +195,7 @@ ActiveRecord::Schema.define(:version => 20091219215907) do
   add_foreign_key "fields", "field_types", :name => "fields_type_id_fk", :column => "type_id", :dependent => :delete
 
   add_foreign_key "people", "genders", :name => "people_gender_id_fk", :dependent => :delete
+  add_foreign_key "people", "provinces", :name => "people_province_id_fk", :dependent => :delete
 
   add_foreign_key "price_rules", "events", :name => "price_rules_event_id_fk", :dependent => :delete
   add_foreign_key "price_rules", "fields", :name => "price_rules_field_id_fk", :dependent => :delete

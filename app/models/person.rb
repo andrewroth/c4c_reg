@@ -6,6 +6,7 @@ class Person < ActiveRecord::Base
   has_many :assignments, :foreign_key => _(:person_id, :assignment)
   has_many :events, :through => :registrations
   belongs_to :gender, :foreign_key => _(:gender_id)
+  belongs_to :province, :foreign_key => _(:province_id)
 
 
 

@@ -9,6 +9,7 @@ class AddForeignKeys < ActiveRecord::Migration
     add_foreign_key(:registrations, :people, :dependent => :delete)
     
     add_foreign_key(:people, :genders, :dependent => :delete)
+    add_foreign_key(:people, :provinces, :dependent => :delete)
     
     add_foreign_key(:assignments, :people, :dependent => :delete)
     add_foreign_key(:assignments, :campuses, :dependent => :delete)
@@ -40,6 +41,7 @@ class AddForeignKeys < ActiveRecord::Migration
     remove_foreign_key(:registrations, :people)
     
     remove_foreign_key(:people, :genders)
+    remove_foreign_key(:people, :provinces)
     
     remove_foreign_key(:assignments, :people)
     remove_foreign_key(:assignments, :campuses)
