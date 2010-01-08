@@ -10,6 +10,33 @@
 <% end %>
 
 
+<h2>Personal Info</h2>
+<p>
+  <%=h @person_info.first_name %>
+  <%=h @person_info.last_name %>
+  <br/><%=h @person_campus_desc %>
+  <br/><%=h @person_info.email %>
+  <br/><%=h @person_info.gender.description %>
+</p>
+
+<h3>Address Info</h3>
+<p>
+  Local Address
+  <br/><%=h @person_info.local_address %>
+  <br/><%=h @person_info.local_city %>
+  <%=h @person_info.local_province_id %>
+  <br/><%=h @person_info.local_postal_code %>
+  <br/><%=h @person_info.local_phone %>
+  <br/>Address
+  <br/><%=h @person_info.address %>
+  <br/><%=h @person_info.city %>
+  <%=h @person_info.province_id %>
+  <br/><%=h @person_info.postal_code %>
+  <br/><%=h @person_info.phone %>
+</p>
+
+
+
 <h2>Pricing</h2>
 
 no credit card stuff yet

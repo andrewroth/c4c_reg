@@ -11,7 +11,7 @@ class Person < ActiveRecord::Base
 
   def get_best_assigned_campus()
 
-    # people have multiple assignments to campuses and there is no good way to pick just one
+    # people can have multiple assignments to campuses and there is no good way to pick just one
     # do our best to pick the most appropriate campus assignment by picking the one with
     # the highest id where that person has student status
     # if the person has no assignments with student status just pick the highest id

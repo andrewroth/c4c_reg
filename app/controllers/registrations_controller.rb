@@ -56,6 +56,9 @@ class RegistrationsController < ApplicationController
 
     @event_fields = @registration.get_event_field()
 
+    @person_info = @registration.person
+    @person_campus_desc = @person_info.get_best_assigned_campus().description
+
   #rescue
     #logger.error "EXCEPTION when loading registration with id #{params[:id]}"
     #flash[:notice] = "Could not load registration information!"
