@@ -37,11 +37,15 @@ class RegistrationsController < ApplicationController
   def edit
     @registration = Registration.find(params[:id])
     @event ||= Event.find(params[:event_id])
+    @person = @registration.person
+    @campus = @person.get_best_assigned_campus()
+    
     @registration_statuses = RegistrationStatus.get_all_statuses("description", "ASC").map { |s| [s.description, s.id] }
 
     @price_info = {}
     @price_info[:rules] = @registration.get_applicable_rules()
     @price_info[:base_price] = @registration.get_base_price_from_rules(@price_info[:rules])
+    @price_info[:regular_base_price] = @registration.get_regular_base_price()
     
     @price_info[:total_cash_paid] = @registration.get_total_cash_paid()
     @price_info[:total_cash_owed] = @registration.get_total_cash_owed()
@@ -55,9 +59,7 @@ class RegistrationsController < ApplicationController
     @cash_transactions = @registration.cash_transactions
 
     @event_fields = @registration.get_event_field()
-
-    @person_info = @registration.person
-    @person_campus_desc = @person_info.get_best_assigned_campus().description
+    
 
   #rescue
     #logger.error "EXCEPTION when loading registration with id #{params[:id]}"

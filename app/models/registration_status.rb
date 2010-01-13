@@ -11,14 +11,11 @@ class RegistrationStatus < ActiveRecord::Base
   INCOMPLETE = "Incomplete"
 
 
-  # return all statuses
-  #   order_field  symbol for field to sort by
-  #   order        optional, should be "ASC" or "DESC"
-  def self.get_all_statuses(order_field, order = "DESC")
+  def self.get_all_statuses(order_field = :id, order = "DESC")
     order = order.upcase
     order = "DESC" if (order != "ASC" && order != "DESC")
 
-    RegistrationStatus.find(:all, :order => _(order_field) + " " + order + ", " + _(:id) + " " + order)
+    RegistrationStatus.all(:order => _(order_field) + " " + order + ", " + _(:id) + " " + order)
   end
 
 end

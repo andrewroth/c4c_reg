@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100108205359) do
+ActiveRecord::Schema.define(:version => 20100113191203) do
 
   create_table "assignment_statuses", :force => true do |t|
     t.string "description", :limit => 64, :null => false
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(:version => 20100108205359) do
 
   add_index "cash_transactions", ["registration_id"], :name => "cash_transactions_registration_id_fk"
 
+  create_table "countries", :force => true do |t|
+    t.string "description",       :limit => 50, :null => false
+    t.string "short_description", :limit => 50, :null => false
+  end
+
   create_table "data_types", :force => true do |t|
     t.string "key",         :limit => 8,  :null => false
     t.string "description", :limit => 64, :null => false
@@ -70,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20100108205359) do
     t.boolean  "on_home_page",                :default => true,  :null => false
     t.boolean  "allow_cash",                  :default => false, :null => false
   end
+
+  add_index "events", ["country_id"], :name => "events_country_id_fk"
 
   create_table "field_types", :force => true do |t|
     t.string "description", :limit => 128, :null => false
@@ -129,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20100108205359) do
     t.string  "middle_name"
   end
 
+  add_index "people", ["country_id"], :name => "people_country_id_fk"
   add_index "people", ["gender_id"], :name => "people_gender_id_fk"
   add_index "people", ["province_id"], :name => "people_province_id_fk"
 
@@ -154,6 +162,8 @@ ActiveRecord::Schema.define(:version => 20100108205359) do
     t.string  "short_description", :limit => 50, :null => false
     t.integer "country_id"
   end
+
+  add_index "provinces", ["country_id"], :name => "provinces_country_id_fk"
 
   create_table "registration_statuses", :force => true do |t|
     t.string "description", :limit => 32, :null => false
@@ -187,6 +197,8 @@ ActiveRecord::Schema.define(:version => 20100108205359) do
 
   add_foreign_key "cash_transactions", "registrations", :name => "cash_transactions_registration_id_fk", :dependent => :delete
 
+  add_foreign_key "events", "countries", :name => "events_country_id_fk", :dependent => :delete
+
   add_foreign_key "field_values", "fields", :name => "field_values_field_id_fk", :dependent => :delete
   add_foreign_key "field_values", "registrations", :name => "field_values_registration_id_fk", :dependent => :delete
 
@@ -194,12 +206,15 @@ ActiveRecord::Schema.define(:version => 20100108205359) do
   add_foreign_key "fields", "events", :name => "fields_event_id_fk", :dependent => :delete
   add_foreign_key "fields", "field_types", :name => "fields_type_id_fk", :column => "type_id", :dependent => :delete
 
+  add_foreign_key "people", "countries", :name => "people_country_id_fk", :dependent => :delete
   add_foreign_key "people", "genders", :name => "people_gender_id_fk", :dependent => :delete
   add_foreign_key "people", "provinces", :name => "people_province_id_fk", :dependent => :delete
 
   add_foreign_key "price_rules", "events", :name => "price_rules_event_id_fk", :dependent => :delete
   add_foreign_key "price_rules", "fields", :name => "price_rules_field_id_fk", :dependent => :delete
   add_foreign_key "price_rules", "price_rule_types", :name => "price_rules_type_id_fk", :column => "type_id", :dependent => :delete
+
+  add_foreign_key "provinces", "countries", :name => "provinces_country_id_fk", :dependent => :delete
 
   add_foreign_key "registrations", "events", :name => "registrations_event_id_fk", :dependent => :delete
   add_foreign_key "registrations", "people", :name => "registrations_person_id_fk", :dependent => :delete

@@ -9,4 +9,12 @@ class Gender < ActiveRecord::Base
   FEMALE = "Female"
   UNKNOWN = "???"
 
+
+  def self.get_all_genders(order_field = :id, order = "DESC")
+    order = order.upcase
+    order = "DESC" if (order != "ASC" && order != "DESC")
+
+    Gender.all(:order => _(order_field) + " " + order + ", " + _(:id) + " " + order)
+  end
+
 end

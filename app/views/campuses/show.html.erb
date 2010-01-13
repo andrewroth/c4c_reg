@@ -1,5 +1,9 @@
 
-<h2><%=h @campus.description %> registrations for: <%=h @event.name %></h2>
+<%= link_to 'Back to all campuses', @event %>
+
+<h2><%=h @event.name %></h2>
+<h2><%=h @campus.description %></h2>
+
 
 <table>
   <tr>

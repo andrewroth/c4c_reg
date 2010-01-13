@@ -1,6 +1,8 @@
 class AddForeignKeys < ActiveRecord::Migration
   def self.up
 
+    add_foreign_key(:events, :countries, :dependent => :delete)
+    
     add_foreign_key(:registrations, :events, :dependent => :delete)
     
     add_foreign_key(:cash_transactions, :registrations, :dependent => :delete)
@@ -10,6 +12,9 @@ class AddForeignKeys < ActiveRecord::Migration
     
     add_foreign_key(:people, :genders, :dependent => :delete)
     add_foreign_key(:people, :provinces, :dependent => :delete)
+    add_foreign_key(:people, :countries, :dependent => :delete)
+    
+    add_foreign_key(:provinces, :countries, :dependent => :delete)
     
     add_foreign_key(:assignments, :people, :dependent => :delete)
     add_foreign_key(:assignments, :campuses, :dependent => :delete)
@@ -33,6 +38,8 @@ class AddForeignKeys < ActiveRecord::Migration
 
   def self.down
 
+    remove_foreign_key(:events, :countries)
+
     remove_foreign_key(:registrations, :events)
     
     remove_foreign_key(:cash_transactions, :registrations)
@@ -42,6 +49,9 @@ class AddForeignKeys < ActiveRecord::Migration
     
     remove_foreign_key(:people, :genders)
     remove_foreign_key(:people, :provinces)
+    remove_foreign_key(:people, :countries)
+    
+    remove_foreign_key(:provinces, :countries)
     
     remove_foreign_key(:assignments, :people)
     remove_foreign_key(:assignments, :campuses)

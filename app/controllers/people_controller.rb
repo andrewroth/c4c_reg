@@ -35,6 +35,10 @@ class PeopleController < ApplicationController
   # GET /people/1/edit
   def edit
     @person = Person.find(params[:id])
+
+    @genders = Gender.get_all_genders().map { |g| [g.description, g.id] }
+
+    @provinces = Province.get_all_provinces_from_country(Country::CANADA, "description", "ASC").map { |p| [p.description, p.id] }
   end
 
   # POST /people
@@ -61,8 +65,8 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        flash[:notice] = 'Person was successfully updated.'
-        format.html { redirect_to(@person) }
+        flash[:notice] = 'Personal information was successfully updated.'
+        format.html { redirect_back(@person) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

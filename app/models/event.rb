@@ -8,16 +8,14 @@ class Event < ActiveRecord::Base
   has_many :price_rules, :foreign_key => _(:event_id, :price_rule)
   has_many :fields, :foreign_key => _(:event_id, :field)
   has_many :people, :through => :registrations
+  belongs_to :country, :foreign_key => _(:country_id)
 
 
-  # return all events
-  #   order_field  symbol for field to sort by
-  #   order        optional, should be "ASC" or "DESC"
-  def self.get_all_events(order_field, order = "DESC")
+  def self.get_all_events(order_field = :id, order = "DESC")
     order = order.upcase
     order = "DESC" if (order != "ASC" && order != "DESC")
 
-    Event.find(:all, :order => _(order_field) + " " + order + ", " + _(:id) + " " + order)
+    Event.all(:order => _(order_field) + " " + order + ", " + _(:id) + " " + order)
   end
 
 

@@ -71,6 +71,11 @@ class Registration < ActiveRecord::Base
   end
 
 
+  def get_regular_base_price()
+    self.event.price.to_f
+  end
+
+
   def get_total_cash_paid()
     cash_paid = self.cash_transactions.all(:select => "SUM(#{__(:amount_paid, :cash_transaction)}) AS total",
                                            :conditions => ["#{__(:received, :cash_transaction)} = ?", true])

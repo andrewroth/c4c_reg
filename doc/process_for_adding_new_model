@@ -23,13 +23,14 @@ Suggested Process for Adding a New Model
      :null => false, :limit => 128, :default => 0
   
 
-3. Create necessary relationship associations in the generated model rb.
+3. Create necessary relationship associations.
    e.g.
      belongs_to :person, :foreign_key => _(:person_id)
-     has_many :cash_transactions, :foreign_key => _(:registration_id, :cash_transaction)
+     has_many :cash_transactions
 
 
-4. Update database foreign key migration using foreigner plugin and change the date in the filename (there can be only one).
+4. Update database foreign key migration using foreigner plugin and change the date in the filename so that it's the most recent migration.
+  (there can be only one add_foreign_keys migration)
    e.g.
      add_foreign_key(:registrations, :people, :dependent => :delete)
   

@@ -1,5 +1,12 @@
-<h1>Editing registration</h1>
 
+<%= link_to 'Back to all registrations', event_campus_path(@event, @campus) %>
+
+
+<h2><%=h @event.name %></h2>
+<h2>
+  <%=h @person.first_name %>
+  <%=h @person.last_name %>
+</h2>
 
 <% form_for :registration, :url => {:action => :update}, :html => {:method => :put} do |form| %>
   <p>
@@ -12,27 +19,29 @@
 
 <h2>Personal Info</h2>
 <p>
-  <%=h @person_info.first_name %>
-  <%=h @person_info.last_name %>
-  <br/><%=h @person_campus_desc %>
-  <br/><%=h @person_info.email %>
-  <br/><%=h @person_info.gender.description %>
+  <%=h @person.first_name %>
+  <%=h @person.last_name %>
+  <br/><%=h @campus.description %>
+  <br/><%= mail_to(@person.email) %>
+  <br/><%=h @person.gender.description %>
+  <br/><%= link_away 'Edit', edit_person_path(@person) %>
 </p>
 
 <h3>Address Info</h3>
 <p>
-  Local Address
-  <br/><%=h @person_info.local_address %>
-  <br/><%=h @person_info.local_city %>
-  <%=h @person_info.local_province_id %>
-  <br/><%=h @person_info.local_postal_code %>
-  <br/><%=h @person_info.local_phone %>
-  <br/>Address
-  <br/><%=h @person_info.address %>
-  <br/><%=h @person_info.city %>
-  <%=h @person_info.province_id %>
-  <br/><%=h @person_info.postal_code %>
-  <br/><%=h @person_info.phone %>
+  Current Address
+  <br/><%=h @person.local_address %>
+  <br/><%=h @person.local_city %>
+  <%=h @person.local_province.description %>
+  <br/><%=h @person.local_postal_code %>
+  <br/><%=h @person.local_phone %>
+
+  <br/>Permanent Address
+  <br/><%=h @person.address %>
+  <br/><%=h @person.city %>
+  <%=h @person.province.description %>
+  <br/><%=h @person.postal_code %>
+  <br/><%=h @person.phone %>
 </p>
 
 
@@ -41,7 +50,10 @@
 
 no credit card stuff yet
 
-<p>Total cost for this registrant: <%=h number_to_currency(@price_info[:base_price]) %></p>
+<p>
+  Total cost for this registrant: <%=h number_to_currency(@price_info[:base_price]) %>
+  (regular <%=h number_to_currency(@price_info[:regular_base_price]) %>)
+</p>
 <p>Total paid: <%=h number_to_currency(@price_info[:amount_paid]) %></p>
 <p>Balance owing: <%=h number_to_currency(@price_info[:balance_owed]) %></p>
 
