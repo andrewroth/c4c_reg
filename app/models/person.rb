@@ -6,14 +6,25 @@ class Person < ActiveRecord::Base
   has_many :assignments, :foreign_key => _(:person_id, :assignment)
   has_many :events, :through => :registrations
   belongs_to :gender, :foreign_key => _(:gender_id)
-  belongs_to :province, :foreign_key => _(:province_id)
-  belongs_to :local_province, :class_name => "Province", :foreign_key => _(:local_province_id)
+  belongs_to :province_assoc, :class_name => "Province", :foreign_key => _(:province_id)
+  belongs_to :local_province_assoc, :class_name => "Province", :foreign_key => _(:local_province_id)
   belongs_to :country, :foreign_key => _(:country_id)
   
 
   validates_presence_of :first_name, :last_name, :email, :gender, :phone, :address, :city, :postal_code, :province
   validates_email_format_of :email
-  
+
+
+  # handle provinces with id of 0
+  def province(*args)
+    self.province_id == 0 ? Province.new : self.province_assoc(*args)
+  end
+
+  # handle local_provinces with id of 0
+  def local_province(*args)
+    self.local_province_id == 0 ? Province.new : self.local_province_assoc(*args)
+  end
+
 
   def get_best_assigned_campus()
 
