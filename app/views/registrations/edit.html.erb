@@ -1,5 +1,5 @@
 
-<%= link_to 'Back to all registrations', event_campus_path(@event, @campus) %>
+<%= link_to('Back to all registrations', event_campus_path(@event, @campus)) %>
 
 
 <h2><%=h @event.name %></h2>
@@ -8,7 +8,7 @@
   <%=h @person.last_name %>
 </h2>
 
-<% form_for :registration, :url => {:action => :update}, :html => {:method => :put} do |form| %>
+<% form_for(:registration, :url => {:action => :update}, :html => {:method => :put}) do |form| %>
   <p>
     <%= form.label(:status_id, 'Current registration status:') %>
     <%= form.select(:status_id, @registration_statuses) %>
@@ -24,7 +24,6 @@
   <br/><%=h @campus.description %>
   <br/><%= mail_to(@person.email) %>
   <br/><%=h @person.gender.description %>
-  <br/><%= link_away 'Edit', edit_person_path(@person) %>
 </p>
 
 <h3>Address Info</h3>
@@ -43,6 +42,7 @@
   <br/><%=h @person.postal_code %>
   <br/><%=h @person.phone %>
 </p>
+<br/><%= link_away('Edit', edit_person_path(@person)) %>
 
 
 
@@ -81,7 +81,7 @@ no credit card stuff yet
     <td><%=h scholarship.source_description %></td>
     <td><%=h scholarship.source_account %></td>
     <td><%=h number_to_currency(scholarship.amount) %></td>
-    <td></td>
+    <td><%= link_away('Edit', edit_event_registration_scholarship_path(@event, @registration, scholarship)) %></td>
   </tr>
   <% end %>
 
@@ -89,6 +89,10 @@ no credit card stuff yet
     <td>Total:</td>
     <td></td>
     <td><%=h number_to_currency(@price_info[:total_scholarship_worth]) %></td>
+    <td></td>
+  </tr>
+
+  <tr>
     <td></td>
   </tr>
 </table>
@@ -102,15 +106,15 @@ no credit card stuff yet
     <th>Staff Name</th>
     <th>Cash Received</th>
     <th>Amount</th>
-    <th></th>
   </tr>
 
   <% @cash_transactions.each do |cash_transaction| %>
   <tr>
     <td><%=h cash_transaction.staff_name %></td>
-    <td><%=h cash_transaction.received %></td>
+    <td><%=h cash_transaction.human_received %></td>
     <td><%=h number_to_currency(cash_transaction.amount_paid) %></td>
-    <td></td>
+    <td><%= link_away('Edit', edit_event_registration_cash_transaction_path(@event, @registration, cash_transaction)) %></td>
+    <td><%= link_away('Delete', event_registration_cash_transaction_path(@event, @registration, cash_transaction), :confirm => 'Are you sure you want to delete this cash transaction?', :method => :delete) %></td>
   </tr>
   <% end %>
 
@@ -118,14 +122,16 @@ no credit card stuff yet
     <td>Total Received:</td>
     <td></td>
     <td><%=h number_to_currency(@price_info[:total_cash_paid]) %></td>
-    <td></td>
   </tr>
 
   <tr>
     <td>Total Not Received:</td>
     <td></td>
     <td><%=h number_to_currency(@price_info[:total_cash_owed]) %></td>
-    <td></td>
+  </tr>
+
+  <tr>
+    <td><%= link_away('Add new cash transaction', new_event_registration_cash_transaction_path(@event, @registration), :registration_id => @registration.id) %></td>
   </tr>
 </table>
 </p>

@@ -36,7 +36,7 @@ class RegistrationsController < ApplicationController
   # GET /registrations/1/edit
   def edit
     @registration = Registration.find(params[:id])
-    @event ||= Event.find(params[:event_id])
+    @event = Event.find(params[:event_id])
     @person = @registration.person
     @campus = @person.get_best_assigned_campus()
     

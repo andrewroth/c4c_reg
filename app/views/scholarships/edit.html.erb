@@ -1,12 +1,10 @@
-<h1>Editing scholarship</h1>
+<%= link_to 'Cancel and go back', return_or_back_url %>
+
+<h2>Editing Scholarship</h2>
 
 <% form_for(@scholarship) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :registration_id %><br />
-    <%= f.text_field :registration_id %>
-  </p>
   <p>
     <%= f.label :amount %><br />
     <%= f.text_field :amount %>
@@ -24,5 +22,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @scholarship %> |
-<%= link_to 'Back', scholarships_path %>
+<%= link_to 'Cancel and go back', return_or_back_url %>

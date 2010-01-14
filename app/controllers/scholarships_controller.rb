@@ -62,7 +62,7 @@ class ScholarshipsController < ApplicationController
     respond_to do |format|
       if @scholarship.update_attributes(params[:scholarship])
         flash[:notice] = 'Scholarship was successfully updated.'
-        format.html { redirect_to(@scholarship) }
+        format.html { redirect_back(@scholarship) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

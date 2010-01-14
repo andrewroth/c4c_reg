@@ -1,19 +1,16 @@
-<h1>Editing cash_transaction</h1>
+<%= link_to 'Cancel and go back', return_or_back_url %>
 
-<% form_for(@cash_transaction) do |f| %>
+<h2>Editing Cash Transaction</h2>
+
+<% form_for([@event, @registration, @cash_transaction]) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label :registration_id %><br />
-    <%= f.text_field :registration_id %>
-  </p>
   <p>
     <%= f.label :staff_name %><br />
     <%= f.text_field :staff_name %>
   </p>
   <p>
-    <%= f.label :received %><br />
-    <%= f.text_field :received %>
+    <%= f.label :received %>
+    <%= f.check_box :received %>
   </p>
   <p>
     <%= f.label :amount_paid %><br />
@@ -27,6 +24,3 @@
     <%= f.submit 'Update' %>
   </p>
 <% end %>
-
-<%= link_to 'Show', @cash_transaction %> |
-<%= link_to 'Back', cash_transactions_path %>

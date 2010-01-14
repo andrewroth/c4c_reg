@@ -1,14 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :scholarships
-  
-  map.resources :cash_transactions
-
   map.resources :people
 
   map.resources :events do |event|
     event.resources :campuses
-    event.resources :registrations
+    event.resources :registrations do |registration|
+      registration.resources :cash_transactions
+      registration.resources :scholarships
+    end
   end
   
   

@@ -8,11 +8,6 @@ class Province < ActiveRecord::Base
   UNKNOWN = "Unknown"
   
 
-  def province(*args)
-    super
-  end
-
-
   def self.get_all_provinces(order_field = :id, order = "DESC")
     order = order.upcase
     order = "DESC" if (order != "ASC" && order != "DESC")

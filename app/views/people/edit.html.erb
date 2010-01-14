@@ -1,6 +1,6 @@
-<%= link_to 'Cancel and go Back', :back %>
+<%= link_to 'Cancel and go back', return_or_back_url %>
 
-<h2>Edit Personal Information</h2>
+<h2>Editing Personal Information</h2>
 
 <% form_for(@person) do |f| %>
   <%= f.error_messages %>
@@ -80,4 +80,4 @@
 
 <% end %>
 
-<%= link_to 'Cancel and go Back', :back %>
+<%= link_to 'Cancel and go back', return_or_back_url %>

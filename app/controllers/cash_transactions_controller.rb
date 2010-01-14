@@ -24,7 +24,9 @@ class CashTransactionsController < ApplicationController
   # GET /cash_transactions/new
   # GET /cash_transactions/new.xml
   def new
-    @cash_transaction = CashTransaction.new
+    @registration = Registration.find(params[:registration_id])
+    @event = Event.find(params[:event_id])
+    @cash_transaction = @registration.cash_transactions.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,18 +36,22 @@ class CashTransactionsController < ApplicationController
 
   # GET /cash_transactions/1/edit
   def edit
+    @registration = Registration.find(params[:registration_id])
+    @event = Event.find(params[:event_id])
     @cash_transaction = CashTransaction.find(params[:id])
   end
 
   # POST /cash_transactions
   # POST /cash_transactions.xml
   def create
+    @registration = Registration.find(params[:registration_id])
+    @event = Event.find(params[:event_id])
     @cash_transaction = CashTransaction.new(params[:cash_transaction])
 
     respond_to do |format|
       if @cash_transaction.save
-        flash[:notice] = 'CashTransaction was successfully created.'
-        format.html { redirect_to(@cash_transaction) }
+        flash[:notice] = 'Cash transaction was successfully created.'
+        format.html { redirect_back(url_for([@event, @registration, @cash_transaction])) }
         format.xml  { render :xml => @cash_transaction, :status => :created, :location => @cash_transaction }
       else
         format.html { render :action => "new" }
@@ -57,12 +63,14 @@ class CashTransactionsController < ApplicationController
   # PUT /cash_transactions/1
   # PUT /cash_transactions/1.xml
   def update
+    @registration = Registration.find(params[:registration_id])
+    @event = Event.find(params[:event_id])
     @cash_transaction = CashTransaction.find(params[:id])
 
     respond_to do |format|
       if @cash_transaction.update_attributes(params[:cash_transaction])
-        flash[:notice] = 'CashTransaction was successfully updated.'
-        format.html { redirect_to(@cash_transaction) }
+        flash[:notice] = 'Cash transaction was successfully updated.'
+        format.html { redirect_back(url_for([@event, @registration, @cash_transaction])) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -78,7 +86,8 @@ class CashTransactionsController < ApplicationController
     @cash_transaction.destroy
 
     respond_to do |format|
-      format.html { redirect_to(cash_transactions_url) }
+      flash[:notice] = 'Cash transaction was deleted.'
+      format.html { redirect_back(event_registration_cash_transactions_path) }
       format.xml  { head :ok }
     end
   end
