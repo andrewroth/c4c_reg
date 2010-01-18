@@ -4,7 +4,7 @@ class Scholarship < ActiveRecord::Base
 
   belongs_to :registration, :foreign_key => _(:registration_id)
 
-  validates_presence_of :amount, :source_account, :source_description
-  validates_numericality_of :amount
+  validates_presence_of _(:amount), _(:source_account), _(:source_description)
+  validates_numericality_of _(:amount)
 
 end

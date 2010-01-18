@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :registrations do |registration|
       registration.resources :cash_transactions
       registration.resources :scholarships
+      registration.resources :field_values
     end
   end
   

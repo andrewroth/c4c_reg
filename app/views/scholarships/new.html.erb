@@ -1,12 +1,11 @@
-<h1>New scholarship</h1>
+<%= link_to 'Cancel and go back', return_or_back_url %>
 
-<% form_for(@scholarship) do |f| %>
+<h2>New Scholarship</h2>
+
+<% form_for([@event, @registration, @scholarship]) do |f| %>
   <%= f.error_messages %>
+  <%= f.hidden_field :registration_id %>
 
-  <p>
-    <%= f.label :registration_id %><br />
-    <%= f.text_field :registration_id %>
-  </p>
   <p>
     <%= f.label :amount %><br />
     <%= f.text_field :amount %>
@@ -20,8 +19,8 @@
     <%= f.text_field :source_description %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Add' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', scholarships_path %>
+<%= link_to 'Cancel and go back', return_or_back_url %>

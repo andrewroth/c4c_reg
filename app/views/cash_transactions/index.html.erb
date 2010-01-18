@@ -6,7 +6,7 @@
     <th>Staff name</th>
     <th>Received</th>
     <th>Amount paid</th>
-    <th>Date</th>
+    <th>Updated at</th>
   </tr>
 
 <% @cash_transactions.each do |cash_transaction| %>
@@ -15,7 +15,7 @@
     <td><%=h cash_transaction.staff_name %></td>
     <td><%=h cash_transaction.received %></td>
     <td><%=h cash_transaction.amount_paid %></td>
-    <td><%=h cash_transaction.date %></td>
+    <td><%=h cash_transaction.updated_at %></td>
     <td><%= link_to 'Show', cash_transaction %></td>
     <td><%= link_to 'Edit', edit_cash_transaction_path(cash_transaction) %></td>
     <td><%= link_to 'Destroy', cash_transaction, :confirm => 'Are you sure?', :method => :delete %></td>

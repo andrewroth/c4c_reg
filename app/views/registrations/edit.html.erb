@@ -8,7 +8,7 @@
   <%=h @person.last_name %>
 </h2>
 
-<% form_for(:registration, :url => {:action => :update}, :html => {:method => :put}) do |form| %>
+<% form_for(@registration, :url => {:action => :update}) do |form| %>
   <p>
     <%= form.label(:status_id, 'Current registration status:') %>
     <%= form.select(:status_id, @registration_statuses) %>
@@ -69,6 +69,9 @@ no credit card stuff yet
 <p>
 <h3>Scholarships</h3>
 <table>
+
+  <% if @has_scholarships then %>
+
   <tr>
     <th>Source Description</th>
     <th>Source Account</th>
@@ -82,6 +85,7 @@ no credit card stuff yet
     <td><%=h scholarship.source_account %></td>
     <td><%=h number_to_currency(scholarship.amount) %></td>
     <td><%= link_away('Edit', edit_event_registration_scholarship_path(@event, @registration, scholarship)) %></td>
+    <td><%= link_away('Delete', event_registration_scholarship_path(@event, @registration, scholarship), :confirm => 'Are you sure you want to delete this scholarship?', :method => :delete) %></td>
   </tr>
   <% end %>
 
@@ -92,8 +96,12 @@ no credit card stuff yet
     <td></td>
   </tr>
 
+  <% else %>
+  <tr><td>This registration has no scholarships.</td></tr>
+  <% end %>
+
   <tr>
-    <td></td>
+    <td><%= link_away('Add new scholarship', new_event_registration_scholarship_path(@event, @registration), :registration_id => @registration.id) %></td>
   </tr>
 </table>
 </p>
@@ -102,6 +110,9 @@ no credit card stuff yet
 <p>
 <h3>Cash Transactions</h3>
 <table>
+
+  <% if @has_cash_transactions then %>
+
   <tr>
     <th>Staff Name</th>
     <th>Cash Received</th>
@@ -130,9 +141,14 @@ no credit card stuff yet
     <td><%=h number_to_currency(@price_info[:total_cash_owed]) %></td>
   </tr>
 
+  <% else %>
+  <tr><td>This registration has no cash transactions.</td></tr>
+  <% end %>
+
   <tr>
     <td><%= link_away('Add new cash transaction', new_event_registration_cash_transaction_path(@event, @registration), :registration_id => @registration.id) %></td>
   </tr>
+
 </table>
 </p>
 
@@ -140,16 +156,30 @@ no credit card stuff yet
 <p>
 <h3>Event Info</h3>
 <table>
+
+  <% if @has_fields then %>
+
   <tr>
     <th>Description</th>
     <th>Value</th>
   </tr>
 
-  <% @event_fields.each do |field| %>
+  <% @field_values.each do |field_value| %>
   <tr>
-    <td><%= field.description %></td>
-    <td><%=h field.value %></td>
+    <td><%= field_value.field.description %></td>
+    <td><%=h field_value.human_value %></td>
   </tr>
+  <% end %>
+
+  <tr>
+    <td></td>
+    <td><%= link_away('Edit event info', event_registration_field_values_url(@event, @registration)) %></td>
+  </tr>
+
+  <% else %>
+  <tr><td>This event has no info fields.</td></tr>
   <% end %>
 </table>
 </p>
+
+<%= link_to('Back to all registrations', event_campus_path(@event, @campus)) %>

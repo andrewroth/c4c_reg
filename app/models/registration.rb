@@ -12,25 +12,27 @@ class Registration < ActiveRecord::Base
   #       but if they remain the same strange things will happen, so we must name it something else here!
   belongs_to :registration_status_assoc, :class_name => "RegistrationStatus", :foreign_key => _(:status_id)
 
+  accepts_nested_attributes_for :field_values
+
   
   def cash_received()
     cash = CashTransaction::NO_CASH_TRANSACTIONS
-    yes = false
-    no = false
+    some_received = false
+    some_not_received = false
 
     self.cash_transactions.each do |transaction|
       if transaction.received == 1
-        yes = true
+        some_received = true
       else
-        no = true
+        some_not_received = true
       end
     end
 
-    if no and yes then
+    if some_not_received and some_received then
       cash = CashTransaction::SOME_CASH_RECEIVED
-    elsif no then
+    elsif some_not_received then
       cash = CashTransaction::NO_CASH_RECEIVED
-    elsif yes then
+    elsif some_received then
       cash = CashTransaction::CASH_RECEIVED
     else
       cash = CashTransaction::NO_CASH_TRANSACTIONS
@@ -93,12 +95,6 @@ class Registration < ActiveRecord::Base
   def get_total_scholarship()
     scholarship_sum = self.scholarships.all(:select => "SUM(#{__(:amount, :scholarship)}) AS total_scholarship_worth")
     scholarship_sum.first.total_scholarship_worth.to_f
-  end
-
-
-  def get_event_field()
-    self.field_values.all(:joins => :field,
-                          :select => "#{__(:description, :field)} AS description, #{__(:value, :field_value)}")
   end
 
 end

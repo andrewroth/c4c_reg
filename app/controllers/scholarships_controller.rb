@@ -1,30 +1,35 @@
 class ScholarshipsController < ApplicationController
-  # GET /scholarships
-  # GET /scholarships.xml
+
+
+  before_filter :load_instances, :except => [:index, :new, :create]
+  
+
+  # GET /events/1/registration/1/scholarships
+  # GET /events/1/registration/1/scholarships.xml
   def index
     @scholarships = Scholarship.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @scholarships }
     end
   end
 
-  # GET /scholarships/1
-  # GET /scholarships/1.xml
+  # GET /events/1/registration/1/scholarships/1
+  # GET /events/1/registration/1/scholarships/1.xml
   def show
-    @scholarship = Scholarship.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @scholarship }
     end
   end
 
-  # GET /scholarships/new
-  # GET /scholarships/new.xml
+  # GET /events/1/registration/1/scholarships/new
+  # GET /events/1/registration/1/scholarships/new.xml
   def new
-    @scholarship = Scholarship.new
+    @registration = Registration.find(params[:registration_id])
+    @event = @registration.event
+    @scholarship = @registration.scholarships.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,20 +37,21 @@ class ScholarshipsController < ApplicationController
     end
   end
 
-  # GET /scholarships/1/edit
+  # GET /events/1/registration/1/scholarships/1/edit
   def edit
-    @scholarship = Scholarship.find(params[:id])
   end
 
-  # POST /scholarships
-  # POST /scholarships.xml
+  # POST /events/1/registration/1/scholarships
+  # POST /events/1/registration/1/scholarships.xml
   def create
+    @registration = Registration.find(params[:registration_id])
+    @event = @registration.event
     @scholarship = Scholarship.new(params[:scholarship])
 
     respond_to do |format|
       if @scholarship.save
         flash[:notice] = 'Scholarship was successfully created.'
-        format.html { redirect_to(@scholarship) }
+        format.html { redirect_back(url_for([@event, @registration, @scholarship])) }
         format.xml  { render :xml => @scholarship, :status => :created, :location => @scholarship }
       else
         format.html { render :action => "new" }
@@ -54,15 +60,13 @@ class ScholarshipsController < ApplicationController
     end
   end
 
-  # PUT /scholarships/1
-  # PUT /scholarships/1.xml
+  # PUT /events/1/registration/1/scholarships/1
+  # PUT /events/1/registration/1/scholarships/1.xml
   def update
-    @scholarship = Scholarship.find(params[:id])
-
     respond_to do |format|
       if @scholarship.update_attributes(params[:scholarship])
         flash[:notice] = 'Scholarship was successfully updated.'
-        format.html { redirect_back(@scholarship) }
+        format.html { redirect_back(url_for([@event, @registration, @scholarship])) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -71,15 +75,24 @@ class ScholarshipsController < ApplicationController
     end
   end
 
-  # DELETE /scholarships/1
-  # DELETE /scholarships/1.xml
+  # DELETE /events/1/registration/1/scholarships/1
+  # DELETE /events/1/registration/1/scholarships/1.xml
   def destroy
-    @scholarship = Scholarship.find(params[:id])
     @scholarship.destroy
 
     respond_to do |format|
-      format.html { redirect_to(scholarships_url) }
+      flash[:notice] = 'Scholarship was deleted.'
+      format.html { redirect_back(event_registration_scholarships_path) }
       format.xml  { head :ok }
     end
+  end
+
+
+  private
+
+  def load_instances
+    @scholarship = Scholarship.find(params[:id])
+    @registration = @scholarship.registration
+    @event = @registration.event
   end
 end

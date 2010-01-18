@@ -1,10 +1,10 @@
 class CampusesController < ApplicationController
 
-  before_filter :load_event
+  before_filter :load_instances, :except => [:index, :new, :create]
 
 
-  # GET /campuses
-  # GET /campuses.xml
+  # GET /events/1/campuses
+  # GET /events/1/campuses.xml
   def index
     @campuses = Campus.all
 
@@ -14,10 +14,9 @@ class CampusesController < ApplicationController
     end
   end
 
-  # GET /campuses/1
-  # GET /campuses/1.xml
+  # GET /events/1/campuses/1
+  # GET /events/1/campuses/1.xml
   def show
-    @campus = Campus.find(params[:id])
     @registrations = @event.registrations_from_campus(@campus)
 
     respond_to do |format|
@@ -26,8 +25,8 @@ class CampusesController < ApplicationController
     end
   end
 
-  # GET /campuses/new
-  # GET /campuses/new.xml
+  # GET /events/1/campuses/new
+  # GET /events/1/campuses/new.xml
   def new
     @campus = Campus.new
 
@@ -37,13 +36,12 @@ class CampusesController < ApplicationController
     end
   end
 
-  # GET /campuses/1/edit
+  # GET events/1/campuses/1/edit
   def edit
-    @campus = Campus.find(params[:id])
   end
 
-  # POST /campuses
-  # POST /campuses.xml
+  # POST /events/1/campuses
+  # POST /events/1/campuses.xml
   def create
     @campus = Campus.new(params[:campus])
 
@@ -59,11 +57,9 @@ class CampusesController < ApplicationController
     end
   end
 
-  # PUT /campuses/1
-  # PUT /campuses/1.xml
+  # PUT /events/1/campuses/1
+  # PUT /events/1/campuses/1.xml
   def update
-    @campus = Campus.find(params[:id])
-
     respond_to do |format|
       if @campus.update_attributes(params[:campus])
         flash[:notice] = 'Campus was successfully updated.'
@@ -76,10 +72,9 @@ class CampusesController < ApplicationController
     end
   end
 
-  # DELETE /campuses/1
-  # DELETE /campuses/1.xml
+  # DELETE /events/1/campuses/1
+  # DELETE /events/1/campuses/1.xml
   def destroy
-    @campus = Campus.find(params[:id])
     @campus.destroy
 
     respond_to do |format|
@@ -91,8 +86,9 @@ class CampusesController < ApplicationController
 
   private
 
-  def load_event
-    @event ||= Event.find(params[:event_id])
+  def load_instances
+    @event = Event.find(params[:event_id])
+    @campus = Campus.find(params[:id])
   end
 
 end

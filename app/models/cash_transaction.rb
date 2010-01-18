@@ -4,8 +4,8 @@ class CashTransaction < ActiveRecord::Base
   
   belongs_to :registration, :foreign_key => _(:registration_id)
 
-  validates_presence_of :registration_id, :staff_name, :received, :amount_paid, :date
-  validates_numericality_of :amount_paid
+  validates_presence_of _(:registration_id), _(:staff_name), _(:received), _(:amount_paid)
+  validates_numericality_of _(:amount_paid)
 
 
   # these constants aren't in the database
@@ -18,10 +18,10 @@ class CashTransaction < ActiveRecord::Base
 
   def human_received
     case self.received
-      when 0
-        NO_CASH_RECEIVED
-      when 1
-        CASH_RECEIVED
+    when 0
+      NO_CASH_RECEIVED
+    when 1
+      CASH_RECEIVED
     end
   end
 

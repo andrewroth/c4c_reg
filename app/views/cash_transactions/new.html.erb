@@ -18,10 +18,8 @@
     <%= f.text_field :amount_paid %>
   </p>
   <p>
-    <%= f.label :date %><br />
-    <%= f.datetime_select :date %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Add' %>
   </p>
 <% end %>
+
+<%= link_to 'Cancel and go back', return_or_back_url %>

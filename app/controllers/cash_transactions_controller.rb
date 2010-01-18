@@ -1,6 +1,10 @@
 class CashTransactionsController < ApplicationController
-  # GET /cash_transactions
-  # GET /cash_transactions.xml
+
+  before_filter :load_instances, :except => [:index, :new, :create]
+
+
+  # GET /events/1/registration/1/cash_transactions
+  # GET /events/1/registration/1/cash_transactions.xml
   def index
     @cash_transactions = CashTransaction.all
 
@@ -10,22 +14,20 @@ class CashTransactionsController < ApplicationController
     end
   end
 
-  # GET /cash_transactions/1
-  # GET /cash_transactions/1.xml
+  # GET /events/1/registration/1/cash_transactions/1
+  # GET /events/1/registration/1/cash_transactions/1.xml
   def show
-    @cash_transaction = CashTransaction.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @cash_transaction }
     end
   end
 
-  # GET /cash_transactions/new
-  # GET /cash_transactions/new.xml
+  # GET /events/1/registration/1/cash_transactions/new
+  # GET /events/1/registration/1/cash_transactions/new.xml
   def new
     @registration = Registration.find(params[:registration_id])
-    @event = Event.find(params[:event_id])
+    @event = @registration.event
     @cash_transaction = @registration.cash_transactions.build
 
     respond_to do |format|
@@ -34,18 +36,15 @@ class CashTransactionsController < ApplicationController
     end
   end
 
-  # GET /cash_transactions/1/edit
+  # GET /events/1/registration/1/cash_transactions/1/edit
   def edit
-    @registration = Registration.find(params[:registration_id])
-    @event = Event.find(params[:event_id])
-    @cash_transaction = CashTransaction.find(params[:id])
   end
 
-  # POST /cash_transactions
-  # POST /cash_transactions.xml
+  # POST /events/1/registration/1/cash_transactions
+  # POST /events/1/registration/1/cash_transactions.xml
   def create
     @registration = Registration.find(params[:registration_id])
-    @event = Event.find(params[:event_id])
+    @event = @registration.event
     @cash_transaction = CashTransaction.new(params[:cash_transaction])
 
     respond_to do |format|
@@ -60,13 +59,9 @@ class CashTransactionsController < ApplicationController
     end
   end
 
-  # PUT /cash_transactions/1
-  # PUT /cash_transactions/1.xml
+  # PUT /events/1/registration/1/cash_transactions/1
+  # PUT /events/1/registration/1/cash_transactions/1.xml
   def update
-    @registration = Registration.find(params[:registration_id])
-    @event = Event.find(params[:event_id])
-    @cash_transaction = CashTransaction.find(params[:id])
-
     respond_to do |format|
       if @cash_transaction.update_attributes(params[:cash_transaction])
         flash[:notice] = 'Cash transaction was successfully updated.'
@@ -79,10 +74,9 @@ class CashTransactionsController < ApplicationController
     end
   end
 
-  # DELETE /cash_transactions/1
-  # DELETE /cash_transactions/1.xml
+  # DELETE /events/1/registration/1/cash_transactions/1
+  # DELETE /events/1/registration/1/cash_transactions/1.xml
   def destroy
-    @cash_transaction = CashTransaction.find(params[:id])
     @cash_transaction.destroy
 
     respond_to do |format|
@@ -91,4 +85,14 @@ class CashTransactionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+  private
+
+  def load_instances
+    @cash_transaction = CashTransaction.find(params[:id])
+    @registration = @cash_transaction.registration
+    @event = @registration.event
+  end
+
 end

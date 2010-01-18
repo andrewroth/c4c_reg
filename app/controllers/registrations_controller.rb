@@ -1,6 +1,10 @@
 class RegistrationsController < ApplicationController
-  # GET /registrations
-  # GET /registrations.xml
+
+  before_filter :load_instances, :except => [:index, :new, :create]
+
+
+  # GET /events/1/registrations
+  # GET /events/1/registrations.xml
   def index
     @registrations = Registration.all
 
@@ -10,19 +14,17 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  # GET /registrations/1
-  # GET /registrations/1.xml
+  # GET /events/1/registrations/1
+  # GET /events/1/registrations/1.xml
   def show
-    @registration = Registration.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @registration }
     end
   end
 
-  # GET /registrations/new
-  # GET /registrations/new.xml
+  # GET /events/1/registrations/new
+  # GET /events/1/registrations/new.xml
   def new
     @registration = Registration.new
 
@@ -33,10 +35,9 @@ class RegistrationsController < ApplicationController
   end
 
 
-  # GET /registrations/1/edit
+  # GET /events/1/registrations/1/edit
   def edit
-    @registration = Registration.find(params[:id])
-    @event = Event.find(params[:event_id])
+    @event = @registration.event
     @person = @registration.person
     @campus = @person.get_best_assigned_campus()
     
@@ -58,9 +59,12 @@ class RegistrationsController < ApplicationController
     @scholarships = @registration.scholarships
     @cash_transactions = @registration.cash_transactions
 
-    @event_fields = @registration.get_event_field()
-    
+    @has_cash_transactions = @cash_transactions.size > 0 ? true : false
+    @has_scholarships = @scholarships.size > 0 ? true : false
 
+    @field_values = @registration.field_values
+    @has_fields = @field_values.size > 0 ? true : false
+    
   #rescue
     #logger.error "EXCEPTION when loading registration with id #{params[:id]}"
     #flash[:notice] = "Could not load registration information!"
@@ -68,8 +72,8 @@ class RegistrationsController < ApplicationController
   end
 
 
-  # POST /registrations
-  # POST /registrations.xml
+  # POST /events/1/registrations
+  # POST /events/1/registrations.xml
   def create
     @registration = Registration.new(params[:registration])
 
@@ -86,11 +90,9 @@ class RegistrationsController < ApplicationController
   end
 
 
-  # PUT /registrations/1
-  # PUT /registrations/1.xml
+  # PUT /events/1/registrations/1
+  # PUT /events/1/registrations/1.xml
   def update
-    @registration = Registration.find(params[:id])
-
     respond_to do |format|
       if @registration.update_attributes(params[:registration])
         flash[:notice] = 'Registration was successfully updated.'
@@ -104,15 +106,21 @@ class RegistrationsController < ApplicationController
   end
 
   
-  # DELETE /registrations/1
-  # DELETE /registrations/1.xml
+  # DELETE /events/1/registrations/1
+  # DELETE /events/1/registrations/1.xml
   def destroy
-    @registration = Registration.find(params[:id])
     @registration.destroy
 
     respond_to do |format|
       format.html { redirect_to(registrations_url) }
       format.xml  { head :ok }
     end
+  end
+
+
+  private
+
+  def load_instances
+    @registration = Registration.find(params[:id])
   end
 end

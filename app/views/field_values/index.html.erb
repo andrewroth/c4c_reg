@@ -1,26 +1,32 @@
-<h1>Listing field_values</h1>
+<%= link_to 'Cancel and go back', return_or_back_url %>
 
-<table>
-  <tr>
-    <th>Field</th>
-    <th>Value</th>
-    <th>Registration</th>
-    <th>Updated at</th>
-  </tr>
+<h2>Editing Event Fields</h2>
 
-<% @field_values.each do |field_value| %>
-  <tr>
-    <td><%=h field_value.field_id %></td>
-    <td><%=h field_value.value %></td>
-    <td><%=h field_value.registration_id %></td>
-    <td><%=h field_value.updated_at %></td>
-    <td><%= link_to 'Show', field_value %></td>
-    <td><%= link_to 'Edit', edit_field_value_path(field_value) %></td>
-    <td><%= link_to 'Destroy', field_value, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% form_for(@registration, :url => event_registration_url(@event.id, @registration.id) , :html => {:method => :put}) do |reg_form| %>
+  <% @registration.field_values.each do |field_value| %>
+
+      <% reg_form.fields_for(:field_values, field_value) do |field_values| %>
+
+        <%= field_value.field.description %>
+        <%=
+        case field_value.field.field_type.description
+        when FieldType::CHECKBOX
+          field_values.check_box(:value)
+        when FieldType::TEXTBOX
+          field_values.text_field(:value)
+        when FieldType::TEXTAREA
+          field_values.text_area(:value)
+        when FieldType::PASSWORD
+          field_values.password_field(:value)
+        end
+        %>
+        <br />
+
+      <% end %>
+
+  <% end %>
+
+  <%= reg_form.submit %>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New field_value', new_field_value_path %>
+<%= link_to 'Cancel and go back', return_or_back_url %>

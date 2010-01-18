@@ -13,17 +13,17 @@ class PriceRule < ActiveRecord::Base
     applies = false
 
     case self.price_rule_type.description
-      when PriceRuleType::FORM_ATTRIBUTE
-        applies = form_attribute_rule_applies_to_registration?(registration)
+    when PriceRuleType::FORM_ATTRIBUTE
+      applies = form_attribute_rule_applies_to_registration?(registration)
 
-      when PriceRuleType::DATE
-        applies = date_rule_applies_to_registration?(registration)
+    when PriceRuleType::DATE
+      applies = date_rule_applies_to_registration?(registration)
 
-      when PriceRuleType::VOLUME
-        applies = volume_rule_applies_to_registration?(registration)
+    when PriceRuleType::VOLUME
+      applies = volume_rule_applies_to_registration?(registration)
 
-      when PriceRuleType::CAMPUS
-        applies = campus_rule_applies_to_registration?(registration)
+    when PriceRuleType::CAMPUS
+      applies = campus_rule_applies_to_registration?(registration)
     end
 
     applies

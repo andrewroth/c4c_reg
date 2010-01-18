@@ -11,8 +11,8 @@ class Person < ActiveRecord::Base
   belongs_to :country, :foreign_key => _(:country_id)
   
 
-  validates_presence_of :first_name, :last_name, :email, :gender, :phone, :address, :city, :postal_code, :province
-  validates_email_format_of :email
+  validates_presence_of _(:first_name), _(:last_name), _(:email), _(:gender), _(:phone), _(:address), _(:city), _(:postal_code), _(:province)
+  validates_email_format_of _(:email)
 
 
   # handle provinces with id of 0

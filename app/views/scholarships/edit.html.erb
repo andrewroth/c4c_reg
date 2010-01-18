@@ -2,7 +2,7 @@
 
 <h2>Editing Scholarship</h2>
 
-<% form_for(@scholarship) do |f| %>
+<% form_for([@event, @registration, @scholarship]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -18,7 +18,7 @@
     <%= f.text_field :source_description %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit %>
   </p>
 <% end %>
 

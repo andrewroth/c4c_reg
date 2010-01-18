@@ -5,7 +5,7 @@ class CreateCashTransactions < ActiveRecord::Migration
       t.string :staff_name,       :null => false, :limit => 64
       t.integer :received,        :null => false
       t.float :amount_paid,       :null => false
-      t.datetime :date,           :null => false
+      t.timestamp :updated_at,    :null => false
     end
   end
 

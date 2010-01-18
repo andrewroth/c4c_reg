@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20100113191203) do
     t.string   "staff_name",      :limit => 64, :null => false
     t.integer  "received",                      :null => false
     t.float    "amount_paid",                   :null => false
-    t.datetime "date",                          :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "cash_transactions", ["registration_id"], :name => "cash_transactions_registration_id_fk"

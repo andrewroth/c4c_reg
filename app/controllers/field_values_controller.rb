@@ -1,28 +1,24 @@
 class FieldValuesController < ApplicationController
-  # GET /field_values
-  # GET /field_values.xml
-  def index
-    @field_values = FieldValue.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @field_values }
-    end
+  before_filter :load_instances, :except => [:new, :create]
+
+
+  # GET /events/1/registration/1/field_values
+  # GET /events/1/registration/1/field_values.xml
+  def index
   end
 
-  # GET /field_values/1
-  # GET /field_values/1.xml
+  # GET /events/1/registration/1/field_values/1
+  # GET /events/1/registration/1/field_values/1.xml
   def show
-    @field_value = FieldValue.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @field_value }
     end
   end
 
-  # GET /field_values/new
-  # GET /field_values/new.xml
+  # GET /events/1/registration/1/field_values/new
+  # GET /events/1/registration/1/field_values/new.xml
   def new
     @field_value = FieldValue.new
 
@@ -32,13 +28,12 @@ class FieldValuesController < ApplicationController
     end
   end
 
-  # GET /field_values/1/edit
+  # GET /events/1/registration/1/field_values/1/edit
   def edit
-    @field_value = FieldValue.find(params[:id])
   end
 
-  # POST /field_values
-  # POST /field_values.xml
+  # POST /events/1/registration/1/field_values
+  # POST /events/1/registration/1/field_values.xml
   def create
     @field_value = FieldValue.new(params[:field_value])
 
@@ -54,13 +49,14 @@ class FieldValuesController < ApplicationController
     end
   end
 
-  # PUT /field_values/1
-  # PUT /field_values/1.xml
+  # PUT /events/1/registration/1/field_values/1
+  # PUT /events/1/registration/1/field_values/1.xml
   def update
-    @field_value = FieldValue.find(params[:id])
+    FieldValue.update(params[:field_value].keys, params[:field_value].values)
 
     respond_to do |format|
-      if @field_value.update_attributes(params[:field_value])
+      #if @field_value.update_attributes(params[:field_value])
+      if @field_value.update(params[:field_value].keys, params[:field_value].values)
         flash[:notice] = 'FieldValue was successfully updated.'
         format.html { redirect_to(@field_value) }
         format.xml  { head :ok }
@@ -71,10 +67,9 @@ class FieldValuesController < ApplicationController
     end
   end
 
-  # DELETE /field_values/1
-  # DELETE /field_values/1.xml
+  # DELETE /events/1/registration/1/field_values/1
+  # DELETE /events/1/registration/1/field_values/1.xml
   def destroy
-    @field_value = FieldValue.find(params[:id])
     @field_value.destroy
 
     respond_to do |format|
@@ -82,4 +77,14 @@ class FieldValuesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+  private
+
+  def load_instances
+    @registration = Registration.find(params[:registration_id])
+    @event = @registration.event
+    @field_values = @registration.field_values
+  end
+
 end
